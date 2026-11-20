@@ -2452,12 +2452,11 @@ body[data-page="detail"] header.site-header.frame { transform:none!important;opa
 .overview-facts .chapter-metrics dd { font-size:clamp(40px,4.2vw,72px);margin:0 0 13px;line-height:1; }
 .overview-facts .chapter-metrics dt { font-size:13px; }
 .overview-facts .chapter-metrics dt small { display:none; }
-.overview-facts>p { font-size:10px;opacity:.5;margin:25px 0 0; }
 .overview-highlights { display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;padding-bottom:75px; }
 .overview-highlights a { display:block;color:inherit; }
 .overview-highlights a>div { position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:12px; }
-.overview-highlights img { width:100%;height:100%;object-fit:cover;transition:scale .5s; }
-.overview-highlights a:hover img { scale:1.035; }
+.overview-highlights video { display:block;width:100%;height:100%;object-fit:cover;pointer-events:none;transition:scale .5s; }
+.overview-highlights a:hover video { scale:1.035; }
 .overview-highlights i { position:absolute;right:12px;bottom:12px;display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:#f6f4e9;color:#273a34;font-style:normal; }
 .overview-highlights h3 { font-size:clamp(15px,1.35vw,23px);font-weight:550;margin:15px 0 9px;line-height:1.4; }
 .overview-highlights a>span { font-size:10px;opacity:.55; }
@@ -2484,7 +2483,7 @@ body[data-page="detail"] header.site-header.frame { transform:none!important;opa
  .overview-highlights { grid-template-columns:1fr;gap:24px;padding-bottom:45px; }.overview-highlights a { display:grid;grid-template-columns:42% 1fr;column-gap:15px;align-items:start; }.overview-highlights a>div { grid-row:1/3; }.overview-highlights h3 { font-size:15px;margin:3px 0 8px; }
  .opening-heading { gap:10px; }.opening-heading .case-audience { margin:0;font-size:10px;padding:5px 7px; }.close-source-grid { grid-template-columns:1fr; }.close-document { padding:17px 30px 17px 16px; }.chapter-close .close-body { padding-bottom:140px; }.chapter-close .chapter-library { right:24px;bottom:28px; }
 }
-@media(prefers-reduced-motion:reduce) { .dossier-face { transition:none; }.overview-highlights img { transition:none; } }
+@media(prefers-reduced-motion:reduce) { .dossier-face { transition:none; }.overview-highlights a:hover video { scale:1; } }
 
 /* The ending remains in document flow: it must never cover the last film. */
 .brand-footer {
@@ -3801,7 +3800,6 @@ body[data-page="detail"] .overview-facts .chapter-metrics>div { display:flex;fle
 body[data-page="detail"] .overview-facts .chapter-metrics>div+div { border-left:1px solid color-mix(in srgb,var(--case-ink) 22%,transparent); }
 body[data-page="detail"] .overview-facts .chapter-metrics dd { font-variant-numeric:tabular-nums;font-weight:500;font-size:clamp(40px,4vw,68px);letter-spacing:-.04em;line-height:1.12;margin:0 0 15px; }
 body[data-page="detail"] .overview-facts .chapter-metrics dt { font-size:13px;line-height:1.5; }
-body[data-page="detail"] .overview-facts>p { margin-top:28px;text-align:center;opacity:.8; }
 /* External reading has an explicit outline, label and outgoing-link affordance. */
 body[data-page="detail"] .close-source-grid { max-width:none;gap:16px; }
 body[data-page="detail"] .close-document {
@@ -5378,10 +5376,15 @@ function renderSpringChapters({item, clips, text, escape, tags}) {
   const data=container.querySelector('.chapter-data');
   overview.classList.add('overview-layout');
   const facts=document.createElement('div');facts.className='overview-facts';facts.id='chapter-02';
-  facts.innerHTML='<h3>'+text('制作规模与影响','Production at a glance')+'</h3>'+data.querySelector('.chapter-metrics').outerHTML+'<p>'+text('项目整体数据，由制作方案例材料披露。','Production-wide figures reported in the source case material.')+'</p>';
+  facts.innerHTML='<h3>'+text('制作规模与影响','Production at a glance')+'</h3>'+data.querySelector('.chapter-metrics').outerHTML;
   const highlights=document.createElement('div');highlights.className='overview-highlights';
   const highlightTitles={window:['车窗换景，保留人物关系。','A new view. The same performance.'],fire:['同一段表演，另一种氛围。','One performance. A different atmosphere.'],clouds:['把等待的云海，变成可设计的镜头。','Design a cloudscape beyond the set.']};
-  highlights.innerHTML=['window','fire','clouds'].map(id=>{const clip=clips.find(c=>c.id===id);return '<a href="#spring-'+id+'" data-reading-target="spring-'+id+'"><div><img loading="lazy" src="'+clip.poster+'" alt=""><i aria-hidden="true">↗</i></div><h3>'+text(...highlightTitles[id])+'</h3><span>'+text(...clipNames[id])+' ↗</span></a>';}).join('');
+  highlights.innerHTML=['window','fire','clouds'].map(id=>{
+    const clip=clips.find(c=>c.id===id);
+    return '<a href="#spring-'+id+'" data-reading-target="spring-'+id+'">'+
+      '<div><video class="cs-loop" muted playsinline loop preload="none" poster="'+escape(clip.poster)+'" src="'+escape(clip.video)+'" aria-hidden="true"></video><i aria-hidden="true">↗</i></div>'+
+      '<h3>'+text(...highlightTitles[id])+'</h3><span>'+text(...clipNames[id])+' ↗</span></a>';
+  }).join('');
   overview.append(facts,highlights);data.remove();
   const closingLinks=holder.querySelector('.chapter-close .close-links');
   const sourceTitle='深度案例｜神力视界将"实拍xAI"融入剧集视效制作【✅可对外】';
