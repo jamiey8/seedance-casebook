@@ -4343,52 +4343,30 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
   .theme-spring .spring-review-links a:last-child {margin-left:0;}
 }
 
-.remedy-article { --remedy-rule:color-mix(in srgb,currentColor 22%,transparent); }
+.remedy-article { --remedy-rule:color-mix(in srgb,currentColor 22%,transparent); background:var(--case-paper); color:var(--case-ink); }
 .theme-remedy .screening-surface > video:not(:fullscreen) { object-fit:cover; object-position:90% center; }
-.remedy-article :is(p,h2,h3,figure) { margin:0; }
-.remedy-article h2 { font-size:clamp(26px,3.4vw,57px); line-height:1.16; letter-spacing:-.04em; }
-.remedy-article h3 { font-size:clamp(19px,1.8vw,30px); line-height:1.4; letter-spacing:-.025em; }
-.remedy-article p { font-size:clamp(15px,1.13vw,19px); line-height:1.84; }
-.remedy-article .remedy-label,.remedy-article figcaption { font-size:13px; line-height:1.55; opacity:.82; }
+:is(.remedy-synopsis,.remedy-methods) :is(p,h2,h3,figure) { margin:0; }
+:is(.remedy-synopsis,.remedy-methods) h2 { font-size:clamp(26px,3.4vw,57px); line-height:1.16; letter-spacing:-.04em; }
+:is(.remedy-synopsis,.remedy-methods) h3 { font-size:clamp(19px,1.8vw,30px); line-height:1.4; letter-spacing:-.025em; }
+:is(.remedy-synopsis,.remedy-methods) p { font-size:clamp(15px,1.13vw,19px); line-height:1.84; }
 .remedy-article .remedy-image { width:100%; display:block; border:0; padding:0; background:transparent; cursor:zoom-in; }
 .remedy-image img { display:block; width:100%; height:auto; border-radius:7px; }
-.remedy-synopsis,.remedy-overview,.remedy-methods { padding:clamp(30px,4.6vw,75px) clamp(22px,6vw,105px); border-top:1px solid var(--remedy-rule); }
-.remedy-synopsis { display:grid; grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr); gap:clamp(32px,6vw,100px); align-items:center; }
-.remedy-poster { justify-self:center; max-width:430px; }
-.remedy-intro-copy { max-width:35em; }
-.remedy-synopsis h2 { margin:0 0 .5em; }
-.remedy-intro-copy p { font-size:clamp(18px,1.55vw,26px); line-height:1.7; }
-.remedy-intro-copy .remedy-technique { margin-top:1.1em; border-inline-start:2px solid var(--remedy-rule); padding-inline-start:1em; font-size:clamp(16px,1.32vw,22px); }
-.remedy-article .remedy-group-index {
- display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap;
- padding-bottom:clamp(24px,3.4vw,50px);
+.remedy-synopsis,.remedy-methods { border-top:1px solid var(--remedy-rule); }
+.remedy-methods { padding:clamp(30px,4.6vw,75px) clamp(22px,6vw,105px); }
+.remedy-synopsis {
+  display:grid;
+  grid-template-columns:minmax(136px,192px) minmax(0,500px);
+  justify-content:center;
+  align-items:center;
+  gap:clamp(24px,3vw,44px);
+  padding:clamp(28px,3vw,44px) clamp(20px,5vw,80px);
 }
-.remedy-article .remedy-index-select { display:inline-flex; align-items:center; gap:8px; font-size:13px; white-space:nowrap; }
-.remedy-article .remedy-index-select select { max-width:100%; color:inherit; }
-.remedy-article .remedy-group {
- display:grid; grid-template-columns:minmax(240px,.72fr) minmax(0,1.6fr);
- gap:clamp(28px,5.8vw,100px); align-items:start;
- border-top:1px solid var(--remedy-rule); padding-block:clamp(30px,4.7vw,76px);
-}
-.remedy-article .remedy-group:last-child { padding-bottom:0; }
-.remedy-group-copy h3 { font-size:clamp(25px,2.6vw,43px); line-height:1.2; }
-.remedy-group-copy>p { margin:14px 0 24px; max-width:29em; }
-.remedy-choices { display:flex; align-items:stretch; flex-wrap:wrap; gap:8px; }
-#route-view .remedy-choice {
- min-height:42px; padding:9px 15px; border:1px solid var(--remedy-rule);
- border-radius:22px; color:inherit; background:transparent; text-align:start;
- font:inherit; font-size:clamp(13px,1vw,16px); line-height:1.45; cursor:pointer;
-}
-#route-view .remedy-choice[aria-pressed=true] { color:var(--essay-paper,#fff); background:var(--case-ink,#233440); border-color:var(--case-ink,#233440); }
-#route-view .remedy-choice:focus-visible { outline:2px solid currentColor; outline-offset:3px; }
-.remedy-sample { min-width:0; }
-.remedy-sample video { display:block; width:100%; aspect-ratio:2.42; object-fit:cover; border-radius:8px; background:#15191c; }
-#route-view .remedy-playback { position:relative; display:block; width:100%; border:0; padding:0; border-radius:8px; background:#15191c; cursor:pointer; }
-#route-view .remedy-playback:focus-visible { outline:3px solid currentColor; outline-offset:4px; }
-.remedy-playback span { position:absolute; right:12px; bottom:10px; padding:5px 13px; color:white; background:rgb(17 28 36 / 88%); border:1px solid rgb(255 255 255 / 55%); border-radius:18px; font:500 13px/1.4 system-ui,sans-serif; }
-.remedy-shot-copy { margin-top:13px; }
-.remedy-shot-copy h4 { margin:0; font-size:clamp(18px,1.5vw,25px); line-height:1.35; }
-.remedy-shot-copy p { margin:6px 0 0; max-width:47em; font-size:clamp(14px,1.1vw,18px); line-height:1.7; }
+.remedy-poster { width:100%; }
+.remedy-intro-copy { min-width:0; }
+.remedy-synopsis h2 { margin:0 0 12px; font-size:clamp(23px,1.8vw,28px); line-height:1.28; letter-spacing:-.025em; }
+.remedy-intro-copy p { font-size:16px; line-height:1.72; text-wrap:pretty; }
+.remedy-intro-copy .remedy-technique { margin-top:12px; font-size:15px; line-height:1.72; color:color-mix(in srgb,var(--case-ink) 85%,var(--case-paper)); }
+.remedy-article .chapter-generate .reading-clip-nav a[aria-current] { background:var(--case-paper); color:var(--case-ink)!important; }
 .remedy-method-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(18px,2.8vw,45px); margin-top:27px; }
 .remedy-method-grid section h3 { font-size:clamp(19px,1.65vw,29px); margin:16px 0 8px; }
 .remedy-sources { display:flex; align-items:center; gap:8px 20px; flex-wrap:wrap; border-top:1px solid var(--remedy-rule); padding-top:18px; margin-top:34px; }
@@ -4396,14 +4374,16 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 .remedy-sources a svg { width:1.15em; height:1.15em; }
 .remedy-sources a:last-child { margin-left:auto; }
 @media(max-width:760px) {
- .remedy-synopsis {grid-template-columns:1fr;gap:24px;align-items:start;}
- .remedy-poster {max-width:100%;}
- .remedy-synopsis,.remedy-overview,.remedy-methods { padding:32px 20px; }
- .remedy-article .remedy-group { grid-template-columns:1fr; gap:18px; padding-block:30px; }
- .remedy-group-copy>p { max-width:none; margin:11px 0 16px; }
- .remedy-article .remedy-index-select {margin:0;}
+ .remedy-methods { padding:32px 20px; }
  .remedy-method-grid {grid-template-columns:1fr; gap:28px;}
  .remedy-sources a:last-child {margin-left:0;}
+}
+
+@media(max-width:560px) {
+ .remedy-synopsis { grid-template-columns:minmax(0,1fr); gap:17px; padding:24px 6vw 28px; }
+ .remedy-article .remedy-poster { width:min(100%,280px); justify-self:center; }
+ .remedy-synopsis h2 { margin-bottom:8px; }
+ .remedy-intro-copy p,.remedy-intro-copy .remedy-technique { font-size:15px; }
 }
 
 #archive-stage .gallery__item[data-case="remedy"] .dossier-media video { transform:scale(1.37); }
@@ -5753,6 +5733,28 @@ function caseAudienceMarkup(item, language) {
   const icon=status==='internal'?'<rect x="5" y="9" width="10" height="8" rx="2"/><path d="M7 9V6a3 3 0 0 1 6 0v3"/>':status==='external'?'<path d="M9 4H4v12h12v-5M10 3h7v7M8 12l9-9"/>':'<circle cx="10" cy="10" r="7"/><path d="M10 6v4M10 13v1"/>';
   return '<span class="case-audience audience-'+status+'" title="'+(language?'Sharing classification from the source collection':'总汇文档标注的分享范围')+'"><svg viewBox="0 0 20 20" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true">'+icon+'</svg>'+label[language]+'</span>';
 }
+// The left directory and the scrolling shot sequence are shared by both case studies.
+function renderClipChapter({ id, number, tone, label, title, description, navLabel, shots }) {
+  const index = value => String(value).padStart(2, '0');
+  const nav = shots.map((shot, i) =>
+    '<a href="#' + shot.id + '" data-reading-target="' + shot.id + '"><span>' + index(i + 1) +
+    '</span>' + shot.label + '<i aria-hidden="true">↗</i></a>'
+  ).join('');
+  const items = shots.map((shot, i) =>
+    '<article class="reading-item" id="' + shot.id + '" data-article-section>' +
+    '<header class="reading-item-heading"><span class="reading-item-index">' + index(i + 1) + ' / ' + index(shots.length) +
+    '</span><h3>' + shot.title + '</h3><p>' + shot.summary + '</p></header>' +
+    '<figure><div class="chapter-video-frame"><video class="cs-loop" controls muted playsinline loop preload="none" ' +
+    'poster="' + shot.poster + '" aria-label="' + shot.title + '" data-clip="' + shot.clipId + '">' +
+    '<source src="' + shot.video + '" type="video/mp4"></video></div>' +
+    (shot.caption ? '<figcaption>' + shot.caption + '</figcaption>' : '') + '</figure>' + (shot.notes || '') + '</article>'
+  ).join('');
+  return '<section class="chapter-panel chapter-clip reading-chapter ' + tone + '" data-chapter="' + number +
+    '" id="' + id + '" aria-labelledby="' + id + '-title"><div class="chapter-copy"><div class="chapter-overline">' +
+    '<span class="chapter-number">' + number + '</span><span>' + label + '</span></div><h2 id="' + id + '-title">' +
+    title + '</h2><p class="chapter-description">' + description + '</p><nav class="reading-clip-nav" aria-label="' +
+    navLabel + '">' + nav + '</nav></div><div class="reading-flow">' + items + '</div></section>';
+}
 function renderSpringChapters({item, clips, text, escape}) {
   const local = value => escape(value[text('zh', 'en')]);
   const prUrl = item.pr.url;
@@ -5787,18 +5789,18 @@ function renderSpringChapters({item, clips, text, escape}) {
   function clipChapter(section,number,title,description) {
     const group=clips.filter(c=>c.section===section);
     const label=section==='editing'?text('实拍镜头编辑','Editing live action'):text('高难度镜头','Complex shots');
-    const nav=group.map((c,i)=>'<a href="#spring-'+c.id+'" data-reading-target="spring-'+c.id+'"><span>'+String(i+1).padStart(2,'0')+'</span>'+text(...clipNames[c.id])+'<i>↗</i></a>').join('');
-    const items=group.map((c,index)=>{
-      const sequence=String(clips.indexOf(c)+1).padStart(2,'0')+' / '+String(clips.length).padStart(2,'0');
-      return '<article class="reading-item" id="spring-'+c.id+'"><div class="reading-item-heading"><span class="reading-item-index">'+String(index+1).padStart(2,'0')+' / '+String(group.length).padStart(2,'0')+'</span><h3>'+local(c.title)+'</h3><p>'+local(c.summary)+'</p></div>'+
-        '<figure><div class="chapter-video-frame"><video class="cs-loop" controls muted playsinline loop preload="none" poster="'+escape(c.poster)+'" aria-label="'+local(c.title)+'" data-clip="'+c.id+'"><source src="'+escape(c.video)+'" type="video/mp4"></video></div>'+
-        '<figcaption><span>'+text('实拍 / 生成 · 制作对照','Live action / generated · Production comparison')+'</span><span>'+sequence+'</span></figcaption></figure>'+
-        '<div class="chapter-observation"><span>'+text('观看要点','Watch for')+'</span><p>'+local(c.note)+'</p></div>'+
-        (c.id==='wardrobe'?'<p class="reading-supplement">'+text('材料附例 · 服装编辑','Supplementary example · Wardrobe editing')+'</p>':'')+'</article>';
-    }).join('');
-    return '<section class="chapter-panel chapter-clip reading-chapter '+(section==='editing'?'chapter-edit':'chapter-generate')+'" data-chapter="'+number+'" id="chapter-'+number+'" aria-label="'+label+'">'+
-      '<div class="chapter-copy"><div class="chapter-overline"><span class="chapter-number">'+number+'</span><span>'+label+'</span></div><h2>'+title+'</h2><p class="chapter-description">'+description+'</p><nav class="reading-clip-nav" aria-label="'+text('本章片段','Chapter excerpts')+'">'+nav+'</nav></div>'+
-      '<div class="reading-flow">'+items+'</div></section>';
+    const shots = group.map(c => {
+      const sequence = String(clips.indexOf(c) + 1).padStart(2, '0') + ' / ' + String(clips.length).padStart(2, '0');
+      return {
+        id: 'spring-' + c.id, clipId: c.id, label: text(...clipNames[c.id]),
+        title: local(c.title), summary: local(c.summary), video: escape(c.video), poster: escape(c.poster),
+        caption: '<span>' + text('实拍 / 生成 · 制作对照','Live action / generated · Production comparison') + '</span><span>' + sequence + '</span>',
+        notes: '<div class="chapter-observation"><span>' + text('观看要点','Watch for') + '</span><p>' + local(c.note) + '</p></div>' +
+          (c.id === 'wardrobe' ? '<p class="reading-supplement">' + text('材料附例 · 服装编辑','Supplementary example · Wardrobe editing') + '</p>' : '')
+      };
+    });
+    return renderClipChapter({ id: 'chapter-' + number, number, label, title, description, shots,
+      tone: section === 'editing' ? 'chapter-edit' : 'chapter-generate', navLabel: text('本章片段','Chapter excerpts') });
   }
   const editing=clipChapter('editing','03',text('保留表演，<br>编辑镜头里的世界。','Keep the performance.<br>Edit the world.'),text('沿用已有表演与机位，逐一对照环境、地形、光线与物件的变化。','Keep the performances and camera positions, then compare changes to settings, terrain, light and props.'));
   const generation=clipChapter('generation','04',text('设计那些<br>难以实拍的镜头。','Design the shots<br>beyond the set.'),text('从云海、岩台到泥石流，观察生成画面如何与实拍段落衔接。','From cloudscapes and rocky ledges to debris flows, see how generated imagery connects with live action.'));
@@ -5822,106 +5824,26 @@ function renderSpringChapters({item, clips, text, escape}) {
   const tr = value => escape(text(...value));
   const asset = file => 'rotating-src/assets/article-media/remedy/' + escape(file);
   const picture = (file, label) => '<button type="button" class="remedy-image" data-case-still aria-label="'+text('放大查看','Enlarge')+' · '+label+'"><img src="'+asset(file)+'" loading="lazy" alt="'+label+'"></button>';
-  const chapters = article.groups.map(group => {
-    const groupId = 'remedy-' + group.id;
-    const first = group.shots[0];
-    const choices = group.shots.map((shot, index) =>
-      '<button type="button" class="remedy-choice" id="remedy-'+escape(shot.id)+'" aria-controls="'+groupId+'-sample" aria-pressed="'+(index === 0)+'" data-src="'+asset(shot.video)+'" data-poster="'+asset(shot.after)+'" data-title="'+tr(shot.title)+'" data-copy="'+tr(shot.copy)+'">'+tr(shot.action)+'</button>'
-    ).join('');
-    return '<remedy-clip-picker class="remedy-group" data-article-section id="'+groupId+'">'+
-      '<div class="remedy-group-copy"><h3 id="'+groupId+'-title">'+tr(group.title)+'</h3><p>'+tr(group.intro)+'</p><div class="remedy-choices" role="group" aria-labelledby="'+groupId+'-title">'+choices+'</div></div>'+
-      '<div class="remedy-sample" id="'+groupId+'-sample"><button class="remedy-playback" type="button" data-play="'+text('播放','Play')+'" data-pause="'+text('暂停','Pause')+'" aria-label="'+text('播放','Play')+' · '+tr(first.title)+'"><video muted loop playsinline preload="none" poster="'+asset(first.after)+'" aria-hidden="true"></video><span>'+text('播放','Play')+'</span></button><div class="remedy-shot-copy" aria-live="polite" aria-atomic="true"><h4>'+tr(first.title)+'</h4><p>'+tr(first.copy)+'</p></div></div></remedy-clip-picker>';
+  const chapters = article.groups.map((group, i) => {
+    const shots = group.shots.map(shot => ({
+      id: 'remedy-' + escape(shot.id), clipId: escape(shot.id), label: tr(shot.title), title: tr(shot.action),
+      summary: tr(shot.copy), video: asset(shot.video), poster: asset(shot.after)
+    }));
+    return renderClipChapter({
+      id: 'remedy-' + escape(group.id), number: String(i + 3).padStart(2, '0'),
+      tone: i === 0 ? 'chapter-edit' : 'chapter-generate', label: text('镜头拆解', 'Shot breakdown'),
+      title: tr(group.title), description: tr(group.intro), navLabel: tr(group.title), shots
+    });
   }).join('');
-  const index = article.groups.map(group => '<option value="remedy-'+escape(group.id)+'">'+tr(group.title)+'</option>').join('');
   const methods = article.takeaways.map(method =>
     '<section>'+picture(method.still,tr(method.case))+'<h3>'+tr(method.title)+'</h3><p>'+tr(method.copy)+'</p></section>'
   ).join('');
   const news = item.pr && '<a href="'+escape(item.pr.url)+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('pr')+text('PR 文章','Press article')+' ↗</a>';
-  return '<article class="case-essay case-essay--spread case-essay--hybrid remedy-article" aria-label="'+tr(item.title)+'">'+
-    '<section class="remedy-synopsis" id="remedy-synopsis"><button type="button" class="remedy-image remedy-poster" data-case-still aria-label="'+text('放大海报','Enlarge poster')+'"><picture><source media="(max-width: 760px)" srcset="'+asset(article.posterLandscape)+'"><img src="'+asset(article.poster)+'" alt="'+tr(article.posterCredit)+'" loading="lazy"></picture></button><div class="remedy-intro-copy"><h2>'+tr(article.overviewTitle)+'</h2><p class="remedy-plot">'+tr(article.overview)+'</p><p class="remedy-technique">'+tr(article.technique)+'</p></div></section>'+
-    '<section class="remedy-overview" id="remedy-overview"><header class="remedy-group-index"><h2>'+text('AI 与实拍如何分工','Where AI enters the live-action workflow')+'</h2><label class="essay-mobile-index remedy-index-select">'+text('镜头分组','Shot groups')+'<select>'+index+'</select></label></header>'+chapters+'</section>'+
+  return '<article class="case-chapters remedy-article" aria-label="'+tr(item.title)+'">'+
+    '<section class="remedy-synopsis" id="remedy-synopsis"><button type="button" class="remedy-image remedy-poster" data-case-still aria-label="'+text('放大海报','Enlarge poster')+'"><picture><source media="(max-width: 560px)" srcset="'+asset(article.posterLandscape)+'"><img src="'+asset(article.poster)+'" alt="'+tr(article.posterCredit)+'" loading="lazy"></picture></button><div class="remedy-intro-copy"><h2>'+tr(article.overviewTitle)+'</h2><p class="remedy-plot">'+tr(article.overview)+'</p><p class="remedy-technique">'+tr(article.technique)+'</p></div></section>'+
+    chapters +
     '<section class="remedy-methods" id="remedy-methods"><h2>'+text('合成让哪些细节更可信？','Which details make the composite convincing?')+'</h2><div class="remedy-method-grid">'+methods+'</div><nav class="remedy-sources">'+(news || '')+'<a href="#/cases">'+text('返回案例分类','Back to categories')+' ↗</a></nav></section></article>';
 }
-
-class RemedyClipPicker extends HTMLElement {
-  connectedCallback() {
-    const buttons = Array.from(this.querySelectorAll('.remedy-choice'));
-    const video = this.querySelector('video');
-    if (!video || !buttons.length) return;
-    const abort = new AbortController();
-    this.abort = abort;
-    const options = { signal: abort.signal };
-    const motion = matchMedia('(prefers-reduced-motion: reduce)');
-    const toggle = this.querySelector('.remedy-playback');
-    const status = toggle.querySelector('span');
-    const heading = this.querySelector('h4');
-    const copy = this.querySelector('.remedy-shot-copy p');
-    let current = buttons[0];
-    let visible = false;
-    let manuallyPaused = false;
-    function updateLabel() {
-      const label = video.paused ? toggle.dataset.play : toggle.dataset.pause;
-      status.textContent = label;
-      toggle.setAttribute('aria-label', label + ' · ' + current.dataset.title);
-    }
-    const hydrate = () => {
-      if (video.getAttribute('src') !== current.dataset.src) video.src = current.dataset.src;
-    };
-    function updatePlayback() {
-      if (!visible || document.hidden) {
-        video.pause();
-        return;
-      }
-      hydrate();
-      if (!motion.matches && !manuallyPaused) video.play().catch(() => {});
-    }
-    function choose(button) {
-      if (button === current) return;
-      const wasPlaying = !video.paused;
-      current.setAttribute('aria-pressed', 'false');
-      current = button;
-      current.setAttribute('aria-pressed', 'true');
-      heading.textContent = current.dataset.title;
-      copy.textContent = current.dataset.copy;
-      updateLabel();
-      video.poster = current.dataset.poster;
-      hydrate();
-      if (wasPlaying && visible && !document.hidden) video.play().catch(() => {});
-      else updatePlayback();
-    }
-    buttons.forEach(button => button.addEventListener('click', () => choose(button), options));
-    toggle.addEventListener('click', () => {
-      if (video.paused) {
-        manuallyPaused = false;
-        hydrate();
-        video.play().catch(updateLabel);
-      } else {
-        manuallyPaused = true;
-        video.pause();
-      }
-    }, options);
-    video.addEventListener('play', updateLabel, options);
-    video.addEventListener('pause', updateLabel, options);
-    video.addEventListener('error', updateLabel, options);
-    const observer = new IntersectionObserver(entries => {
-      visible = entries[0].isIntersecting && entries[0].intersectionRatio >= .2;
-      updatePlayback();
-    }, { threshold: [0, .2] });
-    observer.observe(video);
-    this.observer = observer;
-    document.addEventListener('visibilitychange', updatePlayback, options);
-    motion.addEventListener('change', () => {
-      if (motion.matches) video.pause();
-      else updatePlayback();
-    }, options);
-  }
-  disconnectedCallback() {
-    this.abort?.abort();
-    this.observer?.disconnect();
-    this.querySelector('video')?.pause();
-  }
-}
-customElements.define('remedy-clip-picker', RemedyClipPicker);
 </script>
 <script>function renderCandyChapters({ article, item, mediaMap, local, text, escape, safeLink, stillButton }) {
   const key = article.key;
