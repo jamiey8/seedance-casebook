@@ -3817,7 +3817,13 @@ body[data-page="detail"] .opening-heading .case-audience { background:color-mix(
 .case-reading-sheet .case-essay { border-radius:0; }
 .case-reading-sheet #case-reading-body { scroll-margin-top:100px; }
 .case-stage::after { content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:#080b10;opacity:var(--detail-scroll-dim,0); }
-.opening-hint { opacity:.7;bottom:calc(26px + 100px * var(--opening-progress,0));transition:none; }
+.opening-hint {
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:44px;
+ color:inherit;text-decoration:none;opacity:.76;bottom:calc(clamp(4px,12svh - 52px,26px) + 100px * var(--opening-progress,0));transition:none;
+}
+.opening-hint svg { display:block;width:clamp(68px,7.4vw,142px);height:auto; }
+.opening-hint:is(:hover,:focus-visible) { color:inherit;opacity:1; }
+.opening-hint:focus-visible { outline:2px solid currentColor;outline-offset:4px;border-radius:4px; }
 @media(max-width:1000px) and (min-width:741px) {
  .library-page[data-catalog-view="list"] .case-card { grid-template-columns:110px minmax(0,1fr) 95px 96px 18px;column-gap:15px; }
  .library-page[data-catalog-view="list"] .case-card h3 { font-size:17px; }
@@ -3846,7 +3852,7 @@ body[data-page="detail"] .opening-heading .case-audience { background:color-mix(
  .case-reading-sheet { margin-top:-84px;border-radius:22px 22px 0 0; }
  .reading-sheet-intro { min-height:84px;padding:18px 24px;font-size:11px;gap:12px; }
  .reading-sheet-intro a { font-size:10px; }
- .opening-hint { font-size:10px;bottom:calc(18px + 84px * var(--opening-progress,0)); }
+ .opening-hint { font-size:10px;bottom:calc(clamp(4px,12svh - 52px,18px) + 84px * var(--opening-progress,0)); }
 }
 @media(prefers-reduced-motion:reduce) {
  .home-folder-layer,.home-folder-tab { transition:none; }
@@ -7080,7 +7086,10 @@ function bindCaseStills(root, text) {
     const chapters = key === 'spring'
       ? renderSpringChapters({item, clips:storyClips, text, escape, tags})
       : renderCaseArticle({article:articleData[key], item, key, text, escape, tags, mediaMap:articleMedia, missing:missingArticleMedia});
-    root.innerHTML='<section class="case-opening" id="case-film" aria-label="'+text('影片与项目概览','Film and project overview')+'"><div class="case-stage"><div class="opening-media" style="view-transition-name:case-media">'+media+'</div><div class="opening-title"><div class="opening-heading"><h1>'+escape(item.title[getLanguage()])+'</h1>'+caseAudienceMarkup(item,getLanguage())+'</div><p class="opening-team">'+escape(item.team[getLanguage()])+'</p><div class="card-tags opening-tags">'+tags(item)+'</div><p class="opening-summary">'+escape((item.overview||item.line)[getLanguage()])+'</p><div class="opening-highlights"><span>'+text('核心亮点','Key highlights')+'</span><p>'+escape(item.line[getLanguage()])+'</p></div>'+'<div class="opening-meta-row">'+(item.source?'<a class="opening-source" href="'+escape(item.source)+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('feishu')+'<span>'+text('飞书网页版','Feishu web edition')+' ↗</span></a>':'')+(item.pr?'<a class="opening-pr" href="'+item.pr.url+'" title="'+escape(item.pr.title[getLanguage()])+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('pr')+text('PR 文章','PR article')+' ↗</a>':'')+'</div></div><span class="opening-hint">'+text('向下滚动，了解这个案例','Scroll to explore this case')+' ↓</span></div></section>'+
+    const readingHint = '<a class="opening-hint" href="#case-reading-body" data-reading-target="case-reading-body">' +
+      '<svg viewBox="0 0 144 26" fill="none" aria-hidden="true"><path d="M2 2 72 24 142 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>' +
+      '<span>' + text('向下滚动，了解这个案例', 'Scroll to explore this case') + '</span></a>';
+    root.innerHTML='<section class="case-opening" id="case-film" aria-label="'+text('影片与项目概览','Film and project overview')+'"><div class="case-stage"><div class="opening-media" style="view-transition-name:case-media">'+media+'</div><div class="opening-title"><div class="opening-heading"><h1>'+escape(item.title[getLanguage()])+'</h1>'+caseAudienceMarkup(item,getLanguage())+'</div><p class="opening-team">'+escape(item.team[getLanguage()])+'</p><div class="card-tags opening-tags">'+tags(item)+'</div><p class="opening-summary">'+escape((item.overview||item.line)[getLanguage()])+'</p><div class="opening-highlights"><span>'+text('核心亮点','Key highlights')+'</span><p>'+escape(item.line[getLanguage()])+'</p></div>'+'<div class="opening-meta-row">'+(item.source?'<a class="opening-source" href="'+escape(item.source)+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('feishu')+'<span>'+text('飞书网页版','Feishu web edition')+' ↗</span></a>':'')+(item.pr?'<a class="opening-pr" href="'+item.pr.url+'" title="'+escape(item.pr.title[getLanguage()])+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('pr')+text('PR 文章','PR article')+' ↗</a>':'')+'</div></div>'+readingHint+'</div></section>'+
       '<div class="case-reading-sheet" id="case-reading"><div class="reading-sheet-intro"><span>'+text('深度案例 · 创作拆解','Case study · Inside the process')+'</span><a href="#case-reading-body" data-reading-target="case-reading-body">'+text('开始阅读','Explore the case')+' ↓</a></div><div id="case-reading-body">'+chapters+'</div></div>';
     root.insertAdjacentHTML('beforeend',renderIndexFooter(getLanguage()));
     bindIndexFooters(root);
