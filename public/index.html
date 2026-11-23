@@ -1032,7 +1032,7 @@ body::after { opacity: 0; transition: opacity .32s ease; }
   gap: 16px;
 }
 .reel-credit {
-  display:inline-flex; align-items:center; justify-content:center; gap:7px; min-height:44px;
+  display:inline-flex; align-items:center; justify-content:center; gap:7px; height:100%; box-sizing:border-box;
   min-width:0; padding:4px 6px; border-radius:5px; color:white;
   font:500 13px/1.24 "Helvetica Neue",Arial,"PingFang SC",sans-serif; text-decoration:none;
 }
@@ -1040,21 +1040,20 @@ body::after { opacity: 0; transition: opacity .32s ease; }
 #reel-credit { color:#fff; font-weight:650; text-decoration:underline; text-decoration-color:#ffffff85; text-underline-offset:3px; }
 .reel-credit:is(:hover,:focus-visible) #reel-credit { text-decoration-color:white; }
 .reel-credit:is(:hover,:focus-visible),.reel-controls .reel-arrow:is(:hover,:focus-visible) { background:#ffffff24; }
-.reel-controls,#reel-chapters { display:inline-flex; align-items:center; min-width:0; }
+.reel-controls {
+  display:grid; grid-template-columns:44px minmax(0,1fr) 44px; align-items:center;
+  flex:0 1 266px; min-width:0; height:48px;
+}
 .reel-footer button { background:transparent; border:0; padding:0; color:var(--ink); cursor:pointer; }
 .reel-controls .reel-arrow { display:grid; place-items:center; width:44px; height:44px; flex:0 0 44px; color:#fff; border-radius:50%; }
 .reel-arrow svg { display:block; pointer-events:none; }
 #reel-selection-poster { position:absolute; inset:0; background:#171b1f center/cover no-repeat; pointer-events:none; }
-#reel-chapters { flex:none; }
+#reel-chapters { display:inline-flex; align-items:center; flex:none; }
 #reel-chapters button { width:24px; height:44px; position:relative; }
-#reel-chapters button::before, #reel-chapters button::after {
+#reel-chapters button::before {
   content: ""; position: absolute; left: 2px; right: 2px; top: calc(50% - 1px); height: 2px; background: #ffffff70;
 }
-#reel-chapters button::after {
-  background: var(--ink);
-  transform-origin: left;
-  transform: scaleX(var(--played, 0));
-}
+#reel-chapters [aria-current="true"]::before { background:white; }
 @media (prefers-reduced-motion: no-preference) {
   .intro-copy h1 { animation: title-in .65s cubic-bezier(.2,.7,.25,1) both; }
 }
@@ -1138,13 +1137,13 @@ body::after { opacity: 0; transition: opacity .32s ease; }
 .intro .reel-layer { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; pointer-events:none; }
 .intro .reel-layer.is-current { opacity:1; }
 @media(max-width:760px) {
- .reel-credit { flex-direction:column; align-items:flex-start; justify-content:center; gap:0; font-size:12px; text-align:left; }
+ .reel-controls { flex-basis:214px; height:54px; }
+ .reel-credit { flex-direction:column; gap:0; font-size:12px; text-align:center; }
  .reel-credit span { font-size:10px; line-height:1.2; }
  #reel-credit { line-height:1.25; }
  #reel-chapters button { width:16px; }
 }
 
-#reel-chapters [aria-current="true"]::before { background:#ffffffb8; }
 @media(max-width:360px) { #reel-chapters button { width:13px; } }
 
 /* Opening credits: the title, its descriptor, and the wordmark have three distinct sizes. */
@@ -7026,14 +7025,12 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
         button.title = cases[chapters[i].key].title[lang];
         button.setAttribute('aria-label', (lang ? 'Show film: ' : '切换影片：') + button.title);
         button.setAttribute('aria-current', String(i === active));
-        button.style.setProperty('--played', i < active ? 1 : 0);
       });
       for (const [button, label] of [[previous, lang ? 'Previous film' : '上一部'], [next, lang ? 'Next film' : '下一部']]) {
         button.title = label;
         button.setAttribute('aria-label', label);
       }
     }
-    if (active === index && front.duration > 0) buttons[index].style.setProperty('--played', Math.min(1, front.currentTime / front.duration));
   }
   // Keep the next film buffered while the visible one is playing.
   function prepare(i) {
@@ -7121,7 +7118,6 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
     player.autoplay = false;
     player.addEventListener('loadeddata', () => { if (player === back) swapWhenReady(); });
     player.addEventListener('canplay', () => { if (player === back) swapWhenReady(); });
-    player.addEventListener('timeupdate', () => { if (player === front) refresh(); });
     player.addEventListener('ended', () => {
       if (player === front && pending === null && shouldPlay()) select(wrap(index + 1), false);
     });
