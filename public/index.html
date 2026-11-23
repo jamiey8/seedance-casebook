@@ -3824,6 +3824,12 @@ body[data-page="detail"] .opening-heading .case-audience { background:color-mix(
 .opening-hint svg { display:block;width:clamp(68px,7.4vw,142px);height:auto; }
 .opening-hint:is(:hover,:focus-visible) { color:inherit;opacity:1; }
 .opening-hint:focus-visible { outline:2px solid currentColor;outline-offset:4px;border-radius:4px; }
+@media(prefers-reduced-motion:no-preference) {
+ .opening-hint svg { animation:opening-hint-pulse 1.5s ease-in-out 3; }
+}
+@keyframes opening-hint-pulse {
+ 50% { opacity:.42; }
+}
 @media(max-width:1000px) and (min-width:741px) {
  .library-page[data-catalog-view="list"] .case-card { grid-template-columns:110px minmax(0,1fr) 95px 96px 18px;column-gap:15px; }
  .library-page[data-catalog-view="list"] .case-card h3 { font-size:17px; }
