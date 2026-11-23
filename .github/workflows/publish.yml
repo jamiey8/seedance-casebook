@@ -18,6 +18,12 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Assemble the full Candy film
+        shell: bash
+        run: |
+          film=public/rotating-src/assets/article-media/candy/candy-full.mp4
+          cat release-media/candy/part-{01,02,03} > "$film"
+          echo "d55e7f309f8de79ab19bf02d0d0a31e06cd4b054b2b87d321f0843d0f4a1aa63  $film" | sha256sum --check
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
