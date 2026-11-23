@@ -2221,17 +2221,25 @@ body[data-page="detail"] .site-header.frame:focus-within { transform:translateY(
 #archive-stage .film-note__actions a > svg { width: 1.2em; height: 1.2em; flex: none; }
 #archive-stage .film-note__actions a[hidden] { display: none; }
 
-/* Chapter names carry the hierarchy; descriptive sentences remain supporting copy. */
-.reading-chapter .chapter-copy .chapter-overline {align-items:baseline;gap:14px;padding-bottom:22px;margin-bottom:20px;}
-.reading-chapter .chapter-copy .chapter-overline .chapter-number {flex:none;font-size:20px;line-height:1.3;font-weight:450;letter-spacing:-.02em;opacity:.6;}
+/* Keep the chapter number and name together above the divider. */
+.reading-chapter .chapter-copy .chapter-overline {align-items:center;gap:clamp(14px,1.5vw,28px);padding-bottom:22px;margin-bottom:10px;}
+.reading-chapter .chapter-copy .chapter-overline .chapter-number {
+  flex:none;
+  font-size:clamp(52px,4.3vw,80px);
+  line-height:1;
+  font-weight:430;
+  letter-spacing:-.055em;
+  font-variant-numeric:tabular-nums;
+}
 .reading-chapter .chapter-copy .chapter-overline h2 {margin:0;font-size:clamp(28px,2.7vw,44px);font-weight:600;line-height:1.25;letter-spacing:-.035em;}
-.reading-chapter .chapter-copy .chapter-subtitle {margin:0 0 14px;font-size:17px;font-weight:500;line-height:1.65;}
+.reading-chapter .chapter-copy .chapter-subtitle {margin:0 0 16px;font-size:clamp(20px,1.65vw,30px);font-weight:500;line-height:1.35;}
 .reading-chapter .chapter-copy .chapter-subtitle br {display:none;}
 .reading-chapter .chapter-copy .chapter-description {font-size:14px;line-height:1.8;}
 @media(max-width:740px) {
-  .reading-chapter .chapter-copy .chapter-overline h2 {font-size:28px;}
-  .reading-chapter .chapter-copy .chapter-overline .chapter-number {font-size:17px;}
-  .reading-chapter .chapter-copy .chapter-subtitle {font-size:16px;}
+  .reading-chapter .chapter-copy .chapter-overline {gap:13px;padding-bottom:14px;}
+  .reading-chapter .chapter-copy .chapter-overline h2 {font-size:clamp(23px,6.5vw,28px);}
+  .reading-chapter .chapter-copy .chapter-overline .chapter-number {font-size:clamp(42px,11vw,56px);}
+  .reading-chapter .chapter-copy .chapter-subtitle {font-size:19px;}
 }
 
 /* Floating navigation dock, shared across the archive. */
@@ -6036,8 +6044,8 @@ function renderSpringChapters({item, clips, text, escape}) {
     }));
     return renderClipChapter({
       id: 'remedy-' + escape(group.id), number: String(i + 2).padStart(2, '0'),
-      tone: i === 0 ? 'chapter-edit' : 'chapter-generate', label: tr(group.title),
-      title: text('镜头拆解', 'Shot breakdown'), description: tr(group.intro), navLabel: tr(group.title), shots
+      tone: i === 0 ? 'chapter-edit' : 'chapter-generate', label: text('镜头拆解', 'Shot breakdown'),
+      title: tr(group.title), description: tr(group.intro), navLabel: tr(group.title), shots
     });
   }).join('');
   const methods = article.takeaways.map(method =>
