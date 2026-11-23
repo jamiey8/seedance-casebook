@@ -2241,6 +2241,28 @@ body[data-page="detail"] .site-header.frame:focus-within { transform:translateY(
   .reading-chapter .chapter-copy .chapter-overline .chapter-number {font-size:clamp(42px,11vw,56px);}
   .reading-chapter .chapter-copy .chapter-subtitle {font-size:19px;}
 }
+@media(min-width:741px) and (max-height:640px) {
+  .reading-chapter.chapter-clip>.chapter-copy {
+    top:76px;
+    height:calc(100svh - 76px);
+    padding-block:24px;
+    justify-content:safe center;
+  }
+}
+@media(min-width:741px) and (max-width:1100px) and (max-height:520px) {
+  .reading-chapter.chapter-clip {display:block;background:var(--chapter-right);}
+  .reading-chapter.chapter-clip>.chapter-copy {
+    position:relative;
+    top:auto;
+    height:auto;
+    overflow:visible;
+    padding-block:96px 28px;
+    background:var(--chapter-left);
+  }
+  .reading-chapter.chapter-clip .reading-clip-nav {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 12px;}
+  .reading-chapter.chapter-clip .reading-flow {padding-top:0;}
+  .reading-chapter.chapter-clip .reading-item {padding-top:40px;}
+}
 
 /* Floating navigation dock, shared across the archive. */
 .card-media video,.gallery__item .dossier-media video { pointer-events:none; }
@@ -6015,8 +6037,8 @@ function renderSpringChapters({item, clips, text, escape}) {
     return renderClipChapter({ id: 'chapter-' + number, number, label, title, description, shots,
       tone: section === 'editing' ? 'chapter-edit' : 'chapter-generate', navLabel: text('本章片段','Chapter excerpts') });
   }
-  const editing=clipChapter('editing','02',text('保留表演，<br>编辑镜头里的世界。','Keep the performance.<br>Edit the world.'),text('沿用已有表演与机位，逐一对照环境、地形、光线与物件的变化。','Keep the performances and camera positions, then compare changes to settings, terrain, light and props.'));
-  const generation=clipChapter('generation','03',text('设计那些<br>难以实拍的镜头。','Design the shots<br>beyond the set.'),text('从云海、岩台到泥石流，观察生成画面如何与实拍段落衔接。','From cloudscapes and rocky ledges to debris flows, see how generated imagery connects with live action.'));
+  const editing=clipChapter('editing','02',text('保留表演，编辑镜头里的世界。','Keep the performance. Edit the world.'),text('沿用已有表演与机位，逐一对照环境、地形、光线与物件的变化。','Keep the performances and camera positions, then compare changes to settings, terrain, light and props.'));
+  const generation=clipChapter('generation','03',text('设计那些难以实拍的镜头。','Design the shots beyond the set.'),text('从云海、岩台到泥石流，观察生成画面如何与实拍段落衔接。','From cloudscapes and rocky ledges to debris flows, see how generated imagery connects with live action.'));
   const methods=[
     [text('先给镜头分工','Decide what each shot needs'),text('车窗换景和天光调整沿用实拍底片，保住人物的眼神、动作和遮挡。日出云海可以单独生成，再按山脊位置、光向和前一镜接上。','For window views and relighting, start with the live-action plate to preserve eyelines, movement and occlusion. For the sunrise, generate a separate cloudscape and match its ridgeline and light to the previous shot.')],
     [text('用对照画面做审核','Review the shots side by side'),text('同一段表演从头播到尾。换车窗时沿着窗框检查边缘和透视，改天光时同时看脸部亮度和火光方向，再把镜头接回整场戏。','Play the original and edited take from start to finish. Follow the window frame to check perspective and edges. For the fire scene, compare facial exposure and the direction of light, then watch the shot in sequence.')]
