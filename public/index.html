@@ -3613,7 +3613,8 @@ body[data-page="home"] .reel-footer { inset-inline:2.7%;bottom:max(54px,calc(env
 .home-folder-tab:hover { color:#fff; }
 #archive-stage .gallery__item-wrap[hidden],#archive-stage .gallery__item[hidden] { display:none!important; }
 /* The first rotating case follows the index without the former half-screen lead-in. */
-body[data-page="home"] #archive-stage { background:radial-gradient(ellipse at 70% 20%,#3c4447,transparent 65%),linear-gradient(120deg,#151c22,#343c40);border-radius:0 0 28px 28px;clip-path:inset(0 round 0 0 28px 28px); }
+body[data-page="home"] #archive-stage { background:radial-gradient(ellipse at 70% 20%,#3c4447,transparent 65%),linear-gradient(120deg,#151c22,#343c40);border-radius:0 0 28px 28px;clip-path:inset(0 round 0 0 28px 28px);padding-bottom:var(--gallery-final-card-space,0px); }
+#archive-stage .gallery__item-wrap { translate:var(--gallery-final-card-translate,none)!important; }
 body[data-page="home"] #archive-stage .gallery { margin-top:0;padding-top:64px; }
 /* The gallery navigation gathers into one left-aligned frosted capsule. */
 body[data-page="home"] header.site-header.frame { transition:width .55s cubic-bezier(.2,.7,.2,1),background-color .3s,border-radius .4s; }
@@ -4783,7 +4784,9 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 .xt5-steps p { grid-column:1/-1; font-size:clamp(15px,1.1vw,17px); line-height:1.6; }
 .xt5-applications { border-top:1px solid var(--xt5-rule); margin-top:clamp(24px,2.2vw,32px); padding-top:clamp(16px,1.45vw,22px); }
 .xt5-applications-head { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:12px; }
-.xt5-applications-head h3 { margin:0; font-size:clamp(24px,2vw,32px); }
+.xt5-applications-head h3 { display:flex; align-items:center; gap:.35em; min-width:0; margin:0; font-size:clamp(24px,2vw,32px); }
+.xt5-applications-head h3 svg { width:1em; height:1em; flex:none; }
+.xt5-carousel-arrows { flex:none; }
 .xt5-carousel-arrows,.xt5-scene-choices { display:flex; align-items:center; gap:8px; }
 .xt5-scene-choices { flex-wrap:wrap; margin-bottom:14px; }
 .xt5-applications button { min-height:44px; border:1px solid var(--xt5-rule); color:inherit; background:transparent; border-radius:24px; cursor:pointer; font:inherit; }
@@ -6359,7 +6362,7 @@ function renderSpringChapters({item, clips, text, escape}) {
   const workflow = page('xt5-workflow', '02', '', local(stage.eyebrow),
     '<p class="xt5-lead">' + local(stage.summary) + '</p><ol class="xt5-steps">' + steps +
     '</ol><section class="xt5-applications" aria-labelledby="xt5-applications-title"><div class="xt5-applications-head"><h3 id="xt5-applications-title">' +
-    text('应用场景','Applications') + '</h3><div class="xt5-carousel-arrows">' +
+    caseLinkIcon('film') + text('应用场景','Applications') + '</h3><div class="xt5-carousel-arrows">' +
     arrow(-1, text('上一个场景','Previous scene')) + arrow(1, text('下一个场景','Next scene')) +
     '</div></div><div class="xt5-scene-choices" role="group" aria-labelledby="xt5-applications-title">' + choices +
     '</div><div class="xt5-examples" aria-live="polite">' + media + '</div></section>', local(stage.title));
@@ -7719,11 +7722,15 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
   const homeFolders = createHomeFolderLibrary(() => language, id => selectGalleryCategory(id,{resetPreview:true}));
   document.getElementById('dock-back').onclick=()=>reader.back();
   const gallery = document.querySelector('.gallery');
+  const stage = document.getElementById('archive-stage');
   const intro = document.getElementById('intro');
   const pictures = Array.from(gallery.querySelectorAll('[data-case]'));
   let visibleOrder = order.slice();
   let visiblePictures = pictures.slice();
   let selectedIndustry = 0;
+  let finalCard = null;
+  let finalCardOffset = 0;
+  let finalCardSpace = 0;
   const byKey = new Map(pictures.map(picture => [picture.dataset.case, picture]));
   const note = document.querySelector('.film-note');
   const noteTitle = note.querySelector('h2');
@@ -7748,6 +7755,9 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
     selectedIndustry = industry;
     visibleOrder = order.filter(key => !industry || cases[key].industries.includes(industry));
     visiblePictures = visibleOrder.map(key => byKey.get(key));
+    finalCard?.style.removeProperty('--gallery-final-card-translate');
+    finalCard = visiblePictures.at(-1)?.closest('.gallery__item-wrap');
+    finalCardOffset = 0;
     visiblePictures.forEach((picture,index)=>{
       picture.querySelector('.dossier-number').textContent='CASE '+String(visibleOrder.length-index).padStart(2,'0');
     });
@@ -7784,6 +7794,24 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
     const railBottom = Math.max(162, rail.getBoundingClientRect().bottom);
     return (railBottom + Math.max(railBottom + 120, note.getBoundingClientRect().top)) / 2;
   }
+  function holdFinalCard(stageBottom, center) {
+    const box = finalCard.getBoundingClientRect();
+    const distancePastCenter = center - (box.top - finalCardOffset + box.height / 2);
+    const hold = Math.round(innerHeight * (smallScreen.matches ? .20 : .27));
+    const unextendedBottomAtCenter = stageBottom - finalCardSpace + distancePastCenter;
+    const space = hold + Math.max(0, Math.ceil(innerHeight - unextendedBottomAtCenter));
+    const offset = Math.min(hold, Math.max(0, distancePastCenter));
+    const addedSpace = space - finalCardSpace;
+    if (addedSpace) {
+      stage.style.setProperty('--gallery-final-card-space', space + 'px');
+      finalCardSpace = space;
+    }
+    if (offset !== finalCardOffset) {
+      finalCard.style.setProperty('--gallery-final-card-translate', '0 ' + offset + 'px');
+      finalCardOffset = offset;
+    }
+    return stageBottom + addedSpace;
+  }
   function moveTo(top, immediate = false) {
     if (lenis) lenis.scrollTo(top, {immediate, duration: immediate ? 0 : .85});
     else window.scrollTo({top, behavior: reduced.matches || immediate ? 'instant' : 'smooth'});
@@ -7793,8 +7821,9 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
     if (!target) return;
     ScrollTrigger.refresh();
     const wrap = target.closest('.gallery__item-wrap') || target;
-    const targetTop = scrollY + wrap.getBoundingClientRect().top + wrap.offsetHeight / 2 - viewingCenter();
-    const stageTop = scrollY + document.getElementById('archive-stage').getBoundingClientRect().top;
+    const offset = wrap === finalCard ? finalCardOffset : 0;
+    const targetTop = scrollY + wrap.getBoundingClientRect().top - offset + wrap.offsetHeight / 2 - viewingCenter();
+    const stageTop = scrollY + stage.getBoundingClientRect().top;
     moveTo(smallScreen.matches ? Math.max(targetTop, stageTop - 100) : targetTop, immediate);
   }
   document.getElementById('browse-gallery').addEventListener('click', event => {
@@ -7952,12 +7981,13 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
     queued = false;
     const heroBottom = intro.getBoundingClientRect().bottom;
     intro.style.setProperty('--hero-scroll-dim',String(Math.max(0,Math.min(.64,(innerHeight-heroBottom)/Math.max(1,innerHeight*.9)*.64))));
-    const stageRect=document.getElementById('archive-stage').getBoundingClientRect();
+    const stageRect=stage.getBoundingClientRect();
     const entrance=Math.max(0,Math.min(1,(innerHeight*.8-stageRect.top)/(innerHeight*.65)));
-    const stage=document.getElementById('archive-stage');
     stage.style.setProperty('--gallery-copy-opacity',reduced.matches?'1':String(Math.min(1,entrance*5)));
     stage.style.setProperty('--gallery-copy-shift',Math.max(0,stageRect.top*.5)+'px');
     const focusCenter=viewingCenter();
+    const homeVisible=!document.getElementById('home-view').hidden;
+    const stageBottom=homeVisible&&finalCard ? holdFinalCard(stageRect.bottom, focusCenter) : stageRect.bottom;
     visiblePictures.forEach(picture=>{
       const wrap=picture.closest('.gallery__item-wrap');
       if(!wrap)return;
@@ -7971,15 +8001,11 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
     const indexTop=indexRect.top;
     const folderReveal=Math.max(0,Math.min(1,(innerHeight-84-indexTop)/Math.max(1,innerHeight*.45)));
     document.getElementById('home-case-library').style.setProperty('--inactive-tab-opacity',String(.48+.52*folderReveal));
-    const homeVisible=!document.getElementById('home-view').hidden;
     const footerRect=document.querySelector('#home-index .brand-footer')?.getBoundingClientRect();
     document.body.classList.toggle('has-footer-nav',homeVisible&&!!footerRect&&footerRect.top<100&&footerRect.bottom>0);
-    document.body.classList.toggle('has-gallery-nav',!document.getElementById('home-view').hidden&&indexTop<100&&stageRect.bottom>innerHeight*.35);
-    const firstWrap=visiblePictures[0]?.closest('.gallery__item-wrap');
-    const lastWrap=visiblePictures.at(-1)?.closest('.gallery__item-wrap');
-    const firstRect=firstWrap?.getBoundingClientRect();
-    const lastRect=lastWrap?.getBoundingClientRect();
-    const galleryVisible = homeVisible && entrance>(smallScreen.matches?.45:.12) && stageRect.bottom > innerHeight*.35 && (!lastRect || lastRect.bottom > innerHeight*.25);
+    document.body.classList.toggle('has-gallery-nav',homeVisible&&indexTop<100&&stageBottom>innerHeight*.35);
+    const lastRect=finalCard?.getBoundingClientRect();
+    const galleryVisible = homeVisible && entrance>(smallScreen.matches?.45:.12) && stageBottom > innerHeight*.35 && (!lastRect || lastRect.bottom > innerHeight*.25);
     if (galleryVisible !== inGallery) {
       inGallery = galleryVisible;
       document.body.classList.toggle('is-gallery', inGallery);
