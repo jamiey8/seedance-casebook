@@ -2223,7 +2223,7 @@ body[data-page="detail"] .site-header.frame:focus-within { transform:translateY(
 
 /* Keep the chapter number and name together above the divider. */
 .reading-chapter .chapter-copy .chapter-overline {align-items:center;gap:clamp(14px,1.5vw,28px);padding-bottom:22px;margin-bottom:10px;}
-.reading-chapter .chapter-copy .chapter-overline .chapter-number {
+:is(.reading-chapter .chapter-copy .chapter-overline,.remedy-section-heading) .chapter-number {
   flex:none;
   font-size:clamp(56px,5.6vw,108px);
   line-height:1;
@@ -2238,7 +2238,7 @@ body[data-page="detail"] .site-header.frame:focus-within { transform:translateY(
 @media(max-width:740px) {
   .reading-chapter .chapter-copy .chapter-overline {gap:13px;padding-bottom:14px;}
   .reading-chapter .chapter-copy .chapter-overline h2 {font-size:clamp(23px,6.5vw,28px);}
-  .reading-chapter .chapter-copy .chapter-overline .chapter-number {font-size:clamp(48px,12vw,62px);}
+  :is(.reading-chapter .chapter-copy .chapter-overline,.remedy-section-heading) .chapter-number {font-size:clamp(48px,12vw,62px);}
   .reading-chapter .chapter-copy .chapter-subtitle {font-size:19px;}
 }
 @media(min-width:741px) and (max-height:640px) {
@@ -4386,8 +4386,8 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
  body[data-page="library"] #route-view.library-page .catalog-density { display:none!important; }
 }
 
-/* Spring's project overview and production notes share one wide reading measure. */
-.theme-spring :is(.spring-summary,.spring-review) {
+/* Spring project overview */
+.theme-spring .spring-summary {
   box-sizing:border-box;
   display:block;
   min-height:0;
@@ -4402,13 +4402,15 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 }
 .theme-spring .spring-summary-intro {
   display:grid;
-  grid-template-columns:minmax(0,1.1fr) minmax(0,1.12fr) minmax(0,.65fr);
-  gap:clamp(22px,2.8vw,52px);
-  align-items:center;
+  grid-template-columns:minmax(0,min(42%,62svh)) minmax(0,1fr);
+  grid-template-areas:"poster heading" "poster copy";
+  gap:12px clamp(24px,4vw,70px);
 }
+.theme-spring .spring-summary-heading {grid-area:heading;align-self:end;}
+.theme-spring .spring-summary-copy {grid-area:copy;align-self:start;}
 .theme-spring .spring-kicker,.theme-spring .spring-studio {margin:0;font-size:14px;font-weight:550;line-height:1.5;}
 .theme-spring .spring-kicker {margin-bottom:8px;}
-.theme-spring :is(.spring-summary,.spring-review) h2 {
+.theme-spring .spring-summary h2 {
   margin:0;
   font-size:clamp(31px,3.15vw,54px);
   font-weight:620;
@@ -4418,7 +4420,7 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 }
 .theme-spring .spring-studio {margin-top:12px;font-weight:450;}
 .theme-spring .spring-summary h2>span {display:block;}
-.theme-spring .spring-summary-copy p,.theme-spring .spring-review p {
+.theme-spring .spring-summary-copy p {
   margin:0;
   font-size:clamp(15px,1.05vw,17px);
   line-height:1.6;
@@ -4426,9 +4428,10 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 .theme-spring .spring-summary-still {
   display:block;
   width:100%;
-  max-height:clamp(96px,16vh,166px);
-  aspect-ratio:16/9;
-  object-fit:cover;
+  grid-area:poster;
+  align-self:center;
+  max-width:62svh;
+  aspect-ratio:840/473;
   border-radius:10px;
 }
 .theme-spring .spring-inline-links {display:flex;align-items:center;flex-wrap:wrap;gap:3px 20px;margin-top:8px;}
@@ -4448,7 +4451,7 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 .theme-spring .spring-stats dl>div {display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 10px;min-width:0;}
 .theme-spring .spring-stats dt {font-size:14px;line-height:1.4;}
 .theme-spring .spring-stats dd {order:-1;margin:0;font-size:clamp(32px,3.2vw,54px);font-weight:570;font-variant-numeric:tabular-nums;line-height:1;letter-spacing:-.045em;}
-.theme-spring .spring-excerpts,.theme-spring .spring-workflow ol {
+.theme-spring .spring-excerpts {
   display:grid;
   grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(15px,1.8vw,30px);
@@ -4460,24 +4463,10 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 .theme-spring .spring-excerpt h3 span {font-size:17px;font-weight:440;}
 .theme-spring .spring-excerpt:hover h3 {text-decoration:underline;text-underline-offset:4px;}
 
-.theme-spring .spring-review {border-top:1px solid color-mix(in srgb,var(--case-ink) 22%,transparent);}
-.theme-spring .spring-review .spring-section-inner {padding-block:clamp(30px,5.5vh,70px);}
-.theme-spring .spring-methods {
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(24px,4vw,78px);
-  margin-top:clamp(20px,3.6vh,42px);
-}
-.theme-spring .spring-methods h3,.theme-spring .spring-workflow>h3 {margin:0 0 9px;font-size:clamp(20px,1.65vw,28px);font-weight:560;line-height:1.35;}
-.theme-spring .spring-workflow {margin-top:clamp(24px,4vh,46px);padding-top:clamp(18px,3vh,34px);border-top:1px solid color-mix(in srgb,var(--case-ink) 23%,transparent);}
-.theme-spring .spring-workflow ol {margin:14px 0 0;padding:0;list-style:none;}
-.theme-spring .spring-workflow li {min-width:0;padding:14px 18px 16px;border-radius:10px;background:color-mix(in srgb,var(--case-accent) 23%,var(--case-paper));}
-.theme-spring .spring-workflow li>span {font-size:13px;line-height:1.4;font-weight:550;}
-.theme-spring .spring-workflow h4 {font-size:clamp(16px,1.25vw,21px);line-height:1.45;font-weight:590;letter-spacing:-.02em;margin:7px 0 5px;}
-.theme-spring .spring-review-links {margin-top:clamp(19px,3vh,32px);border-top:1px solid color-mix(in srgb,var(--case-ink) 23%,transparent);padding-top:10px;}
-.theme-spring .spring-review-links a:last-child {margin-left:auto;}
+.theme-spring .spring-article-footer {display:flex;justify-content:flex-end;padding:16px 6vw 26px;background:var(--case-paper);color:var(--case-ink);border-top:1px solid color-mix(in srgb,currentColor 22%,transparent);}
+.theme-spring .spring-article-footer a {font-size:14px;line-height:1.5;padding:8px 0;color:inherit;text-underline-offset:4px;}
 @media (min-width:901px) and (min-height:600px) {
-  .theme-spring :is(.spring-summary,.spring-review) {
+  .theme-spring .spring-summary {
     min-height:100svh;
     display:grid;
     grid-template-columns:minmax(0,1fr);
@@ -4488,25 +4477,22 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 .theme-spring .spring-summary {min-height:100svh;padding-inline:6vw;}
 .theme-spring .spring-summary .spring-section-inner {
   max-width:var(--case-intro-width);
-  padding:96px 0 48px;
+  padding:90px 0 18px;
 }
 @media (max-width:900px) {
-  .theme-spring .spring-summary-intro {grid-template-columns:1fr 1.2fr;}
-  .theme-spring .spring-summary-still {display:none;}
   .theme-spring .spring-stats {display:block;}
   .theme-spring .spring-stats dl {margin-top:12px;}
 }
 @media (max-width:690px) {
   .theme-spring .spring-section-inner {padding:26px 20px 36px;}
-  .theme-spring .spring-summary-intro,.theme-spring .spring-methods,.theme-spring .spring-workflow ol,.theme-spring .spring-excerpts {grid-template-columns:minmax(0,1fr);}
-  .theme-spring .spring-summary-intro {gap:14px;}
+  .theme-spring .spring-excerpts {grid-template-columns:minmax(0,1fr);}
+  .theme-spring .spring-summary-intro {grid-template-columns:minmax(0,1fr);grid-template-areas:"heading" "poster" "copy";gap:16px;}
+  .theme-spring .spring-summary-still {max-width:none;}
   .theme-spring .spring-stats dl {gap:12px;}
   .theme-spring .spring-stats dl>div {display:flex;flex-direction:column;gap:4px;}
   .theme-spring .spring-stats dt {font-size:13px;line-height:1.45;}
   .theme-spring .spring-stats dd {font-size:clamp(29px,7vw,40px);}
   .theme-spring .spring-excerpts {gap:18px;}
-  .theme-spring .spring-workflow ol {gap:9px;}
-  .theme-spring .spring-review-links a:last-child {margin-left:0;}
 }
 
 .remedy-article { --remedy-rule:color-mix(in srgb,currentColor 22%,transparent); background:var(--case-paper); color:var(--case-ink); }
@@ -4541,15 +4527,11 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 .remedy-intro-copy h3 { margin:30px 0 10px; font-size:18px; line-height:1.4; font-weight:580; }
 .remedy-intro-copy .remedy-technique { color:color-mix(in srgb,var(--case-ink) 90%,var(--case-paper)); }
 .remedy-article .remedy-section-label {
-  display:flex;
-  align-items:center;
-  gap:14px;
-  margin:0 0 18px;
+  margin:0 0 4px;
   font-size:14px;
   line-height:1.5;
   opacity:.76;
 }
-.remedy-section-label > span { font-family:ui-monospace,monospace; font-variant-numeric:tabular-nums; }
 .remedy-methods { display:flex; align-items:center; justify-content:center; }
 .remedy-methods-inner { width:100%; max-width:1120px; }
 .remedy-methods h2 { font-size:clamp(28px,2.5vw,38px); line-height:1.3; }
@@ -4639,6 +4621,18 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
   .remedy-method-grid>section {display:block;}
   .remedy-method-grid section h3 {margin-top:0;}
 }
+.remedy-section-heading {display:flex;align-items:baseline;gap:clamp(13px,1.5vw,28px);}
+.remedy-section-heading h2 {min-width:0;margin:0;overflow-wrap:anywhere;}
+.remedy-intro-copy .remedy-section-heading {margin-bottom:16px;}
+.remedy-article .chapter-copy .chapter-overline {align-items:baseline;padding-bottom:12px;margin-bottom:15px;}
+.remedy-article .chapter-copy .chapter-subtitle {
+  align-self:flex-start;
+  max-width:100%;
+  padding:5px 11px;
+  border-radius:7px;
+  background:color-mix(in srgb,currentColor 10%,transparent);
+  font-size:clamp(14px,1.1vw,19px);
+}
 
 /* A complete opening page: film title, story, then production credits. */
 .candy-intro-spread {
@@ -4716,6 +4710,8 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 .xt5-sheet h2 { margin:0; max-width:32ch; font-size:clamp(30px,3vw,47px); line-height:1.17; font-weight:600; letter-spacing:-.035em; text-wrap:balance; }
 .xt5-lead,.xt5-steps p { margin:0; font-size:clamp(16px,1.2vw,19px); line-height:1.7; text-wrap:pretty; }
 .xt5-lead { max-width:76ch; }
+.xt5-intro .xt5-head { display:grid; grid-template-columns:auto auto minmax(0,1fr); margin-bottom:0; }
+.xt5-intro .xt5-lead { border-inline-start:1px solid var(--xt5-rule); padding-inline-start:clamp(16px,1.6vw,28px); max-width:68ch; }
 .xt5-workflow .xt5-lead { max-width:100%; }
 .xt5-previews { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(12px,1.8vw,24px); margin:clamp(16px,2.6vh,27px) 0 0; }
 #route-view .xt5-previews button { display:flex; flex-direction:column; overflow:visible; min-width:0; border:0; background:none; color:inherit; }
@@ -4739,15 +4735,21 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 .xt5-steps li:not(:last-child)::after { content:""; position:absolute; top:33px; left:100%; width:calc(var(--step-gap) + 2px); border-top:1px solid var(--xt5-rule); }
 .xt5-steps p { grid-column:1/-1; font-size:clamp(15px,1.1vw,17px); line-height:1.6; }
 .xt5-applications { border-top:1px solid var(--xt5-rule); margin-top:clamp(24px,2.2vw,32px); padding-top:clamp(16px,1.45vw,22px); }
-.xt5-applications>h3 { margin-bottom:16px; font-size:clamp(24px,2vw,32px); }
-.xt5-examples { display:grid; grid-template-columns:minmax(0,1.8fr) minmax(0,1fr); gap:clamp(16px,1.5vw,24px); align-items:start; }
+.xt5-applications-head { display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:12px; }
+.xt5-applications-head h3 { margin:0; font-size:clamp(24px,2vw,32px); }
+.xt5-carousel-arrows,.xt5-scene-choices { display:flex; align-items:center; gap:8px; }
+.xt5-scene-choices { flex-wrap:wrap; margin-bottom:14px; }
+.xt5-applications button { min-height:44px; border:1px solid var(--xt5-rule); color:inherit; background:transparent; border-radius:24px; cursor:pointer; font:inherit; }
+.xt5-carousel-arrows button { width:44px; padding:0; display:grid; place-items:center; }
+.xt5-scene-choices button { padding:7px 15px; font-size:14px; line-height:1.25; }
+.xt5-scene-choices button[aria-pressed="true"] { color:var(--case-paper); background:var(--case-ink); }
+.xt5-applications button:hover { border-color:currentColor; }
+.xt5-applications button:focus-visible { outline:2px solid var(--case-ink); outline-offset:3px; }
 .xt5-examples figure { margin:0; min-width:0; }
-.xt5-examples figure:first-child { grid-row:span 2; }
+.xt5-examples figure[hidden] { display:none; }
 .xt5-examples video,.xt5-article .reading-item .chapter-video-frame video { width:100%; display:block; aspect-ratio:54/17; object-fit:contain; }
 .xt5-examples video { border-radius:12px; background:#151515; }
-.xt5-examples figcaption { display:flex; flex-wrap:wrap; align-items:baseline; gap:2px 12px; padding-top:8px; }
-.xt5-examples h4 { margin:0; font-size:clamp(16px,1.2vw,20px); font-weight:600; line-height:1.4; }
-.xt5-examples p { margin:0; font-size:14px; line-height:1.5; }
+.xt5-examples figcaption { padding-top:8px; font-size:14px; line-height:1.5; }
 .xt5-article .reading-item-heading>p { font-size:clamp(15px,1.1vw,18px); }
 .xt5-article .reading-item figcaption { font-size:13px; }
 .xt5-article .chapter-generate .reading-clip-nav a[aria-current] { background:var(--case-paper);color:var(--case-ink)!important; }
@@ -4767,14 +4769,16 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
  .xt5-sheet { padding:64px 23px 40px; }
  .xt5-number { font-size:44px; }
  .xt5-head { gap:13px; }
+ .xt5-intro .xt5-head { grid-template-columns:auto minmax(0,1fr); }
+ .xt5-intro .xt5-lead { grid-column:1/-1; border:0; padding:0; }
  .xt5-previews { gap:12px; }
  .xt5-previews button>span { font-size:13px; }
  .xt5-metrics { display:block; }.xt5-metrics dl {margin-top:12px;gap:16px;}
  .xt5-metrics dl>div { display:flex; flex-direction:column; gap:5px; }
  .xt5-steps { grid-template-columns:1fr; gap:13px; }
  .xt5-steps li:not(:last-child)::after { top:100%; left:24px; width:0; height:15px; border-top:0; border-left:1px solid var(--xt5-rule); }
- .xt5-examples { grid-template-columns:1fr; gap:22px; }
- .xt5-examples figure:first-child { grid-row:auto; }
+ .xt5-scene-choices { gap:6px; }
+ .xt5-scene-choices button { padding-inline:11px; }
  .xt5-lessons .essay-table-wrap { overflow:visible; }
  .xt5-lessons table,.xt5-lessons tbody,.xt5-lessons caption {display:block; width:100%;min-width:0;}
  .xt5-lessons thead {position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);}
@@ -4833,7 +4837,6 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 <button type="button" class="gallery__item dossier-film" data-case="candy" style="background-image:url(rotating-src/assets/article-media/candy/official-poster.webp)"><span class="dossier-face"><span class="dossier-tabs" aria-hidden="true"><span class="dossier-tab"><span class="dossier-number">CASE 07</span><span class="dossier-category" data-zh="影视" data-en="Film &amp; TV">影视</span></span><span class="dossier-subtab" data-subtype="short" data-zh="短片" data-en="Short Film">短片</span></span><span class="dossier-media"></span></span></button>
 </div><div class="mark font-1 stage-overlay" aria-hidden="true"><div class="mark__inner"></div></div><aside class="film-note stage-overlay" aria-labelledby="film-name" inert>
   <div class="film-note__text">
-    <p class="film-note__meta" hidden></p>
     <div class="film-note__heading"><h2 id="film-name"></h2><div class="film-note__sharing"></div></div>
     <p class="film-note__overview"></p>
     <div class="film-note__highlights"><h3 data-zh="核心亮点" data-en="Key highlights">核心亮点</h3><p class="film-note__summary"></p></div>
@@ -6128,10 +6131,10 @@ function renderSpringChapters({item, clips, text, escape}) {
       '<h3>'+text(...clipNames[id])+' <span aria-hidden="true">↗</span></h3></a>';
   };
   const overview = '<section class="spring-summary reading-chapter" id="chapter-01" data-chapter="01" aria-labelledby="spring-summary-title"><div class="spring-section-inner">'+
-    '<div class="spring-summary-intro"><header><p class="spring-kicker">'+text('作品与项目','The project')+'</p><h2 id="spring-summary-title">'+text('早春晴朗','Early Spring, Clear Skies')+'</h2><p class="spring-studio">'+text('神力视界 × Seedance','Shenli Vision × Seedance')+'</p></header>'+
+    '<div class="spring-summary-intro"><header class="spring-summary-heading"><p class="spring-kicker">'+text('作品与项目','The project')+'</p><h2 id="spring-summary-title">'+text('早春晴朗','Early Spring, Clear Skies')+'</h2><p class="spring-studio">'+text('神力视界 × Seedance','Shenli Vision × Seedance')+'</p></header>'+
+    '<button type="button" class="spring-summary-still case-view-still" data-case-still aria-label="'+text('查看剧照','View still')+'"><img alt="'+text('《早春晴朗》云海片名画面','The Early Spring title over a cloudscape')+'" src="'+escape(item.poster)+'"><span aria-hidden="true">⤢</span></button>'+
     '<div class="spring-summary-copy"><p>'+text('神力视界保留演员的实拍表演，用 Seedance 替换车窗外的风景、延展地形、调整天光。云海与泥石流等难以实拍的镜头则单独生成，再剪回人物所在的场景。','Shenli Vision kept the actors’ live performances and used Seedance to change window views, extend terrain and adjust the light. Cloudscapes and debris flows were generated as separate shots and cut back into the filmed scenes.')+'</p>'+
-    '<nav class="spring-inline-links" aria-label="'+text('项目资料与制作回看','Project sources and production notes')+'">'+sourceLinks+'<a href="#chapter-04" data-reading-target="chapter-04">'+text('制作回看','Production notes')+' ↓</a></nav></div>'+
-    '<button type="button" class="spring-summary-still case-view-still" data-case-still aria-label="'+text('查看剧照','View still')+'"><img alt="'+text('《早春晴朗》云海片名画面','The Early Spring title over a cloudscape')+'" src="'+escape(item.poster)+'"><span aria-hidden="true">⤢</span></button></div>'+
+    '<nav class="spring-inline-links" aria-label="'+text('项目资料','Project sources')+'">'+sourceLinks+'</nav></div></div>'+
     '<div class="spring-stats" id="spring-production-stats"><h3>'+text('制作规模与影响','Production at a glance')+'</h3><dl>'+facts.map(([value,label])=>'<div><dt>'+label+'</dt><dd>'+value+'</dd></div>').join('')+'</dl></div>'+
     '<div class="spring-excerpts">'+['window','fire','clouds'].map(highlight).join('')+'</div></div></section>';
 
@@ -6153,26 +6156,16 @@ function renderSpringChapters({item, clips, text, escape}) {
   }
   const editing=clipChapter('editing','02',text('保留表演，编辑镜头里的世界。','Keep the performance. Edit the world.'),text('沿用已有表演与机位，逐一对照环境、地形、光线与物件的变化。','Keep the performances and camera positions, then compare changes to settings, terrain, light and props.'));
   const generation=clipChapter('generation','03',text('设计那些难以实拍的镜头。','Design the shots beyond the set.'),text('从云海、岩台到泥石流，观察生成画面如何与实拍段落衔接。','From cloudscapes and rocky ledges to debris flows, see how generated imagery connects with live action.'));
-  const methods=[
-    [text('先给镜头分工','Decide what each shot needs'),text('车窗换景和天光调整沿用实拍底片，保住人物的眼神、动作和遮挡。日出云海可以单独生成，再按山脊位置、光向和前一镜接上。','For window views and relighting, start with the live-action plate to preserve eyelines, movement and occlusion. For the sunrise, generate a separate cloudscape and match its ridgeline and light to the previous shot.')],
-    [text('用对照画面做审核','Review the shots side by side'),text('同一段表演从头播到尾。换车窗时沿着窗框检查边缘和透视，改天光时同时看脸部亮度和火光方向，再把镜头接回整场戏。','Play the original and edited take from start to finish. Follow the window frame to check perspective and edges. For the fire scene, compare facial exposure and the direction of light, then watch the shot in sequence.')]
-  ];
-  const phases=[
-    [text('前期','Pre-production'),text('拆剧本、画分镜、做预演','Break down the script, storyboard and previsualise'),text('标出必须保留的表演和机位，确定哪些场景需要生成。','Mark the performances and camera positions to preserve, and identify scenes that need generation.')],
-    [text('制作中','Production'),text('生成场景镜头，审核迭代','Generate, review and revise shots'),text('把实拍底片和生成版本放在一起，逐次核对景别、光向与动作。','Review each generated version beside its plate for shot scale, light direction and movement.')],
-    [text('后期','Post-production'),text('合成修复，剪辑适配','Composite, repair and edit'),text('修正边缘和遮挡，把镜头放回整场，检查光线、空间和动作是否连贯。','Refine edges and occlusion. Watch the edited scene in full to check light, space and motion across cuts.')]
-  ];
-  const closing='<section class="spring-review reading-chapter" id="chapter-04" data-chapter="04" aria-labelledby="spring-review-title"><div class="spring-section-inner">'+
-    '<h2 id="spring-review-title">'+text('制作回看','Production notes')+'</h2><div class="spring-methods">'+methods.map(([label,copy])=>'<section><h3>'+label+'</h3><p>'+copy+'</p></section>').join('')+'</div>'+
-    '<section class="spring-workflow"><h3>'+text('松果创作画布','Songguo creative canvas')+'</h3><ol>'+phases.map(([phase,step,copy])=>'<li><span>'+phase+'</span><h4>'+step+'</h4><p>'+copy+'</p></li>').join('')+'</ol></section>'+
-    '<nav class="spring-inline-links spring-review-links" aria-label="'+text('延伸阅读','Further reading')+'">'+pressLink+'<a href="#/cases">'+text('返回案例分类','Back to categories')+' ↗</a></nav></div></section>';
-  return '<div class="case-chapters">'+overview+editing+generation+closing+'</div>';
+  const back = '<nav class="spring-article-footer"><a href="#/cases">'+text('返回案例分类','Back to categories')+' ↗</a></nav>';
+  return '<div class="case-chapters">'+overview+editing+generation+back+'</div>';
 }
 </script>
 <script>function renderRemedyArticle({article, item, text, escape}) {
   const tr = value => escape(text(...value));
   const asset = file => 'rotating-src/assets/article-media/remedy/' + escape(file);
   const picture = (file, label) => '<button type="button" class="remedy-image" data-case-still aria-label="'+text('放大查看','Enlarge')+' · '+label+'"><img src="'+asset(file)+'" loading="lazy" alt="'+label+'"></button>';
+  const heading = (number, id, title) => '<header class="remedy-section-heading"><span class="chapter-number">' +
+    number + '</span><h2 id="' + id + '">' + title + '</h2></header>';
   const chapters = article.groups.map((group, i) => {
     const shots = group.shots.map(shot => ({
       id: 'remedy-' + escape(shot.id), clipId: escape(shot.id), label: tr(shot.title), title: tr(shot.action),
@@ -6190,9 +6183,11 @@ function renderSpringChapters({item, clips, text, escape}) {
   const teamIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3M16 5a3 3 0 0 1 0 6m2 3a5 5 0 0 1 3 4v3"/></svg>';
   const news = item.pr && '<a href="'+escape(item.pr.url)+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('pr')+text('PR 文章','Press article')+' ↗</a>';
   return '<article class="case-chapters remedy-article" aria-label="'+tr(item.title)+'">'+
-    '<section class="remedy-synopsis" id="remedy-synopsis" data-article-section data-chapter="01" aria-labelledby="remedy-intro-title"><div class="remedy-synopsis-inner"><button type="button" class="remedy-image remedy-poster" data-case-still aria-label="'+text('放大海报','Enlarge poster')+'"><picture><source media="(max-width: 560px)" width="1080" height="810" srcset="'+asset(article.posterLandscape)+'"><img width="1080" height="1440" src="'+asset(article.poster)+'" alt="'+tr(article.posterCredit)+'" loading="lazy"></picture></button><div class="remedy-intro-copy"><p class="remedy-section-label"><span>01</span>'+text('作品介绍','The project')+'</p><h2 id="remedy-intro-title">'+tr(article.overviewTitle)+'</h2><p class="remedy-plot">'+tr(article.overview)+'</p><section class="remedy-team-card"><h3>'+teamIcon+text('制作团队','Production team')+'</h3><p class="remedy-technique">'+tr(article.technique)+'</p></section></div></div></section>'+
+    '<section class="remedy-synopsis" id="remedy-synopsis" data-article-section data-chapter="01" aria-labelledby="remedy-intro-title"><div class="remedy-synopsis-inner"><button type="button" class="remedy-image remedy-poster" data-case-still aria-label="'+text('放大海报','Enlarge poster')+'"><picture><source media="(max-width: 560px)" width="1080" height="810" srcset="'+asset(article.posterLandscape)+'"><img width="1080" height="1440" src="'+asset(article.poster)+'" alt="'+tr(article.posterCredit)+'" loading="lazy"></picture></button><div class="remedy-intro-copy"><p class="remedy-section-label">'+text('作品介绍','The project')+'</p>'+
+    heading('01', 'remedy-intro-title', tr(article.overviewTitle))+'<p class="remedy-plot">'+tr(article.overview)+'</p><section class="remedy-team-card"><h3>'+teamIcon+text('制作团队','Production team')+'</h3><p class="remedy-technique">'+tr(article.technique)+'</p></section></div></div></section>'+
     chapters +
-    '<section class="remedy-methods" id="remedy-methods" data-article-section data-chapter="04" aria-labelledby="remedy-methods-title"><div class="remedy-methods-inner"><p class="remedy-section-label"><span>04</span></p><h2 id="remedy-methods-title">'+text('合成效果','Compositing results')+'</h2><p class="remedy-methods-subtitle">'+text('合成让哪些细节更可信？','Which details make the composite convincing?')+'</p><div class="remedy-method-grid">'+methods+'</div><nav class="remedy-sources">'+(news || '')+'<a href="#/cases">'+text('返回案例分类','Back to categories')+' ↗</a></nav></div></section></article>';
+    '<section class="remedy-methods" id="remedy-methods" data-article-section data-chapter="04" aria-labelledby="remedy-methods-title"><div class="remedy-methods-inner">'+
+    heading('04', 'remedy-methods-title', text('合成效果','Compositing results'))+'<p class="remedy-methods-subtitle">'+text('合成让哪些细节更可信？','Which details make the composite convincing?')+'</p><div class="remedy-method-grid">'+methods+'</div><nav class="remedy-sources">'+(news || '')+'<a href="#/cases">'+text('返回案例分类','Back to categories')+' ↗</a></nav></div></section></article>';
 }
 </script>
 <script>function renderCandyChapters({ article, item, mediaMap, local, text, escape, safeLink, stillButton }) {
@@ -6280,12 +6275,13 @@ function renderSpringChapters({item, clips, text, escape}) {
   const comparison = article.sections.find(section => section.id === 'breakdowns');
   const lessons = article.sections.find(section => section.id === 'crowd-lessons');
 
-  function page(id, number, label, title, content, subtitle = '') {
+  function page(id, number, label, title, content, subtitle = '', introduction = '') {
     return '<section id="' + id + '" class="xt5-sheet ' + id + '" data-article-section data-chapter="' +
       number + '" aria-labelledby="' + id + '-title"><div class="xt5-inner"><header class="xt5-head">' +
       '<span class="xt5-number">' + number + '</span><div class="xt5-heading-copy">' +
       (label ? '<p class="xt5-label">' + label + '</p>' : '') + '<h2 id="' + id +
-      '-title">' + title + '</h2>' + (subtitle ? '<p class="xt5-subtitle">' + subtitle + '</p>' : '') + '</div></header>' + content + '</div></section>';
+      '-title">' + title + '</h2>' + (subtitle ? '<p class="xt5-subtitle">' + subtitle + '</p>' : '') + '</div>' +
+      (introduction ? '<p class="xt5-lead">' + introduction + '</p>' : '') + '</header>' + content + '</div></section>';
   }
 
   const previews = item.screenings.map((film, index) =>
@@ -6295,19 +6291,28 @@ function renderSpringChapters({item, clips, text, escape}) {
   const metrics = article.metrics.map(metric => '<div><dt>' + local(metric.label) + '</dt><dd>' +
     escape(metric.value) + '</dd><dd>' + local(metric.note) + '</dd></div>').join('');
   const overview = page('xt5-intro', '01', caseLinkIcon('film') + local(article.overviewTitle), local(item.title),
-    '<p class="xt5-lead">' + local(article.overview) + '</p><div class="essay-film-previews xt5-previews">' +
-    previews + '</div><div class="xt5-metrics"><p>' + local(article.intro) + '</p><dl>' + metrics + '</dl></div>');
+    '<div class="essay-film-previews xt5-previews">' + previews + '</div><div class="xt5-metrics"><p>' +
+    local(article.intro) + '</p><dl>' + metrics + '</dl></div>', '', local(article.overview));
 
   const steps = stage.points.map(point => '<li><h3>' + local(point.title) +
     '</h3><p>' + local(point.body) + '</p></li>').join('');
-  const media = stage.media.map(clip => '<figure><video controls muted playsinline loop preload="none" class="cs-loop" aria-label="' +
+  const choices = stage.media.map((clip, i) => '<button type="button" data-example="' + i +
+    '" aria-pressed="' + (i === 0) + '" aria-controls="xt5-example-' + i + '">' + local(clip.heading) + '</button>').join('');
+  const media = stage.media.map((clip, i) => '<figure id="xt5-example-' + i + '"' + (i ? ' hidden' : '') +
+    '><video controls muted playsinline loop preload="none" aria-label="' +
     local(clip.caption) + '" poster="' + source(clip.poster) + '"><source src="' +
-    source(clip.localPath) + '" type="video/mp4"></video><figcaption><h4>' + local(clip.heading) +
-    '</h4><p>' + local(clip.caption) + '</p></figcaption></figure>').join('');
+    source(clip.localPath) + '" type="video/mp4"></video><figcaption>' + local(clip.caption) + '</figcaption></figure>').join('');
+  const arrow = (step, label) => '<button type="button" data-example-step="' + step + '" aria-label="' + label +
+    '"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="' +
+    (step < 0 ? 'm14 5-7 7 7 7' : 'm10 5 7 7-7 7') + '"/></svg></button>';
   const workflow = page('xt5-workflow', '02', '', local(stage.eyebrow),
     '<p class="xt5-lead">' + local(stage.summary) + '</p><ol class="xt5-steps">' + steps +
-    '</ol><section class="xt5-applications" aria-labelledby="xt5-applications-title"><h3 id="xt5-applications-title">' +
-    text('应用场景','Applications') + '</h3><div class="xt5-examples">' + media + '</div></section>', local(stage.title));
+    '</ol><section class="xt5-applications" aria-labelledby="xt5-applications-title"><div class="xt5-applications-head"><h3 id="xt5-applications-title">' +
+    text('应用场景','Applications') + '</h3><div class="xt5-carousel-arrows">' +
+    arrow(-1, text('上一个场景','Previous scene')) + arrow(1, text('下一个场景','Next scene')) +
+    '</div></div><div class="xt5-scene-choices" role="group" aria-labelledby="xt5-applications-title">' + choices +
+    '</div><div class="xt5-examples" aria-live="polite">' + media + '</div></section>', local(stage.title));
 
   const breakdowns = comparison.groups.map((group, index) => {
     const shots = group.rows.flat().map(clip => ({
@@ -6335,6 +6340,38 @@ function renderSpringChapters({item, clips, text, escape}) {
     '<p class="xt5-lead">' + local(lessons.summary) + '</p>' + factTable(lessons.table, {labelCells:true, rowIcons:lineDiagrams}), local(lessons.title));
   return '<article class="case-chapters xt5-article" aria-label="' + local(item.title) + '">' +
     overview + workflow + breakdowns + review + '</article>';
+}
+
+function bindCadillacExamples(root) {
+  const carousel = root.querySelector('.xt5-applications');
+  if (!carousel) return;
+  const choices = Array.from(carousel.querySelectorAll('[data-example]'));
+  const scenes = Array.from(carousel.querySelectorAll('.xt5-examples figure'));
+  let active = 0;
+
+  function show(index) {
+    const next = (index + scenes.length) % scenes.length;
+    if (next === active) return;
+    scenes[active].querySelector('video').pause();
+    scenes[active].hidden = true;
+    choices[active].setAttribute('aria-pressed', 'false');
+    active = next;
+    scenes[active].hidden = false;
+    choices[active].setAttribute('aria-pressed', 'true');
+  }
+  for (const [i, choice] of choices.entries()) choice.onclick = () => show(i);
+  for (const arrow of carousel.querySelectorAll('[data-example-step]')) {
+    arrow.onclick = () => show(active + Number(arrow.dataset.exampleStep));
+  }
+  carousel.querySelector('.xt5-scene-choices').onkeydown = event => {
+    const index = choices.indexOf(event.target);
+    if (index < 0) return;
+    const steps = { ArrowLeft:index - 1, ArrowRight:index + 1, Home:0, End:scenes.length - 1 };
+    if (!Object.hasOwn(steps, event.key)) return;
+    event.preventDefault();
+    show(steps[event.key]);
+    choices[active].focus();
+  };
 }
 </script>
 <script>/* Full bilingual case articles. Original files stay on the same origin as the casebook. */
@@ -6989,6 +7026,7 @@ function bindCaseStills(root, text) {
     root.insertAdjacentHTML('beforeend',renderIndexFooter(getLanguage()));
     bindIndexFooters(root);
     const stopArticle = key === 'spring' ? () => {} : bindCaseArticle(root);
+    if (key === 'xt5') bindCadillacExamples(root);
     root.querySelectorAll('a[href="#/cases"]').forEach(link=>link.onclick=event=>{event.preventDefault();go('#/cases');});
     const opening=root.querySelector('.case-opening');
     const stage=root.querySelector('.case-stage');
@@ -7632,7 +7670,6 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
   let selectedIndustry = 0;
   const byKey = new Map(pictures.map(picture => [picture.dataset.case, picture]));
   const note = document.querySelector('.film-note');
-  const noteMeta = note.querySelector('.film-note__meta');
   const noteTitle = note.querySelector('h2');
   const noteSummary = note.querySelector('.film-note__summary');
   const noteButton = note.querySelector('.film-note__open');
@@ -7787,9 +7824,6 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
     activeKey = key;
     note.dataset.case = key;
     pictures.forEach(picture=>{const selected=picture.dataset.case===key;picture.classList.toggle('is-current',selected);picture.setAttribute('aria-pressed',String(selected));});
-    const mediaLabel = record.mediaKind?.[language] || (!record.video && record.source ? (language ? 'Still preview' : '剧照预览') : '');
-    noteMeta.textContent = record.video ? '' : mediaLabel;
-    noteMeta.hidden = !noteMeta.textContent;
     note.querySelector('.film-note__sharing').innerHTML=caseAudienceMarkup(record,language);
     note.querySelector('.film-note__overview').textContent=(record.overview||record.line)[language];
     noteTitle.textContent = record.title[language];
