@@ -1031,26 +1031,21 @@ body::after { opacity: 0; transition: opacity .32s ease; }
   justify-content: space-between;
   gap: 16px;
 }
-.reel-credit { display: flex; align-items: baseline; gap: 10px; font-size: 13px; }
+.reel-credit { display: flex; align-items: baseline; gap: 8px; font-size: 13px; white-space:nowrap; }
 .reel-credit span { color: #e0dfd9; }
-.reel-credit strong { font-weight: 620; }
-.reel-controls, #reel-chapters { display: inline-flex; align-items: center; gap: 5px; }
-.reel-controls button { background: transparent; border: 0; padding: 0; color: var(--ink); cursor: pointer; }
-#reel-chapters button { width: clamp(20px, 2.55vw, 45px); height: 30px; position: relative; }
+.reel-controls, #reel-chapters { display: inline-flex; align-items: center; }
+.reel-footer button { background: transparent; border: 0; padding: 0; color: var(--ink); cursor: pointer; }
+.reel-controls .reel-arrow { width:32px; height:40px; flex:none; color:white; font:24px/1 Arial,sans-serif; }
+.reel-controls .reel-arrow:hover { opacity:.75; }
+#reel-chapters button { width:24px; height:32px; position:relative; }
 #reel-chapters button::before, #reel-chapters button::after {
-  content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 2px; background: #ffffff62;
+  content: ""; position: absolute; left: 2px; right: 2px; top: 50%; height: 2px; background: #ffffff62;
 }
 #reel-chapters button::after {
   background: var(--ink);
   transform-origin: left;
   transform: scaleX(var(--played, 0));
 }
-#reel-toggle {
-  margin-left: 8px; width: 34px; height: 34px;
-  border: 1px solid #ffffff80; border-radius: 50%;
-  display: inline-grid; place-items: center; font: 13px/1 Arial, sans-serif;
-}
-#reel-toggle:hover { border-color: white; }
 @media (prefers-reduced-motion: no-preference) {
   .intro-copy h1 { animation: title-in .65s cubic-bezier(.2,.7,.25,1) both; }
 }
@@ -1107,8 +1102,7 @@ body::after { opacity: 0; transition: opacity .32s ease; }
   .intro-copy h1 { font-size: clamp(42px, 9vw, 63px); letter-spacing: -.05em; line-height: 1.1; }
   .intro-browse { margin-top: 24px; padding-left: 15px; font-size: 13px; }
   .intro-shade { background: linear-gradient(90deg,#10121178, #10121135 65%),linear-gradient(to top,#090a0994,transparent 36%); }
-  .reel-credit { flex-direction: column; gap: 2px; font-size: 11px; }
-  .reel-credit strong { font-size: 13px; }
+  .reel-credit { gap:5px; font-size:12px; }
   .reel-footer { inset-inline: 20px; }
   .gallery { width: 100%; margin-left: 0; margin-top: 24svh; }
   .gallery__item-wrap { max-width: min(89vw, 560px); }
@@ -1134,14 +1128,9 @@ body::after { opacity: 0; transition: opacity .32s ease; }
 }
 .intro .reel-layer { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; pointer-events:none; }
 .intro .reel-layer.is-current { opacity:1; }
-.reel-controls .reel-arrow {
- display:inline-grid; place-items:center; width:38px; height:38px; flex:none;
- border:1px solid #ffffff80; border-radius:50%; background:#171a1e48; color:white; font:25px/1 Arial,sans-serif;
-}
-.reel-arrow:focus-visible,.reel-arrow:hover { outline:2px solid white; outline-offset:2px; }
 @media(max-width:760px) {
- .reel-controls .reel-arrow { width:34px; height:34px; }
- #reel-chapters button { max-width:16px; }
+ .reel-controls .reel-arrow { width:28px; height:40px; }
+ #reel-chapters button { width:16px; }
 }
 
 /* Opening credits: the title, its descriptor, and the wordmark have three distinct sizes. */
@@ -3365,7 +3354,7 @@ body[data-page="home"] .site-brand>span { display:none; }
 body[data-page="home"] .intro { height:calc(var(--first-screen-height,100svh) - var(--home-index-tail));border-radius:0; }
 body[data-page="home"] header.site-header.frame { padding:clamp(18px,1vw,24px) 2.7%; }
 body[data-page="home"] .site-brand strong { font-size:clamp(26px,1.7vw,34px); }
-body[data-page="home"] .reel-footer { inset-inline:2.7%;bottom:max(54px,calc(env(safe-area-inset-bottom) + 32px));justify-content:flex-start;gap:clamp(18px,2vw,36px); }
+body[data-page="home"] .reel-footer { inset-inline:2.7%;bottom:max(54px,calc(env(safe-area-inset-bottom) + 32px));justify-content:flex-start;gap:8px; }
 /* Compact category index, connected to the original rotating gallery. */
 .home-case-library { --folder-unit:calc(100vw / 1799);position:relative;isolation:isolate;z-index:1003;height:calc(96 * var(--folder-unit));margin-top:calc(-84 * var(--folder-unit));margin-bottom:-1px;color:#14262b;font-family:"Helvetica Neue",Arial,"PingFang SC",sans-serif; }
 .home-folder-definitions { position:absolute;pointer-events:none; }
@@ -3414,9 +3403,7 @@ body[data-page="home"].has-floating-categories .gallery-category-nav { opacity:1
  body[data-page="home"] .intro-copy { left:7%;right:6%;top:36%; }
  .intro-main { font-size:26px; }.intro-secondary { font-size:clamp(33px,8.5vw,57px);gap:.22em;flex-wrap:wrap;row-gap:0; }
  .intro-secondary>span { font-size:.8em; }.intro-browse { margin-top:25px; }
- body[data-page="home"] .reel-footer { left:20px;right:20px;bottom:max(72px,calc(env(safe-area-inset-bottom) + 50px));gap:12px;flex-wrap:wrap; }
- .reel-credit { flex-direction:row;flex-wrap:wrap;gap:7px; }
- .reel-controls { gap:4px; }#reel-chapters button { width:25px; }
+ body[data-page="home"] .reel-footer { left:12px;right:12px;bottom:max(72px,calc(env(safe-area-inset-bottom) + 50px));gap:4px;flex-wrap:wrap; }
  .home-case-library { margin-top:-84px;height:110px;--folder-unit:1px; }
  body[data-page="home"] #archive-stage .gallery { padding-top:50px; }
  .home-folder-tabs { height:64px; }.home-folder-tab { font-size:clamp(11px,3vw,15px);letter-spacing:0; }
@@ -4305,7 +4292,7 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 }
 
 .remedy-article { --remedy-rule:color-mix(in srgb,currentColor 22%,transparent); }
-.theme-remedy .screening-surface > video:not(:fullscreen) { object-fit:cover; object-position:center 8%; }
+.theme-remedy .screening-surface > video:not(:fullscreen) { object-fit:cover; object-position:90% center; }
 .remedy-article :is(p,h2,h3,figure) { margin:0; }
 .remedy-article h2 { font-size:clamp(26px,3.4vw,57px); line-height:1.16; letter-spacing:-.04em; }
 .remedy-article h3 { font-size:clamp(19px,1.8vw,30px); line-height:1.4; letter-spacing:-.025em; }
@@ -4354,33 +4341,6 @@ body[data-page="library"] header.site-header.frame .dock-case-context strong { l
 #archive-stage .gallery__item[data-case="wind"] .dossier-media video { transform:scale(1.32); }
 #archive-stage .gallery__item[data-case="candy"] .dossier-media video { transform:scale(1.38); }
 .theme-wind .case-essay--spread .essay-frame video { aspect-ratio:1920 / 822; object-fit:cover; }
-
-/* The series opens on its original Seedance artwork and then the full production reel. */
-body[data-page="detail"] .theme-remedy .remedy-reading-sheet {
-  margin:0; padding-top:clamp(84px,8vw,122px); border-radius:0 0 24px 24px;
-  background:#e7edf0; color:#243d48;
-}
-.remedy-reading-sheet .remedy-synopsis {
-  padding-top:clamp(12px,2.8vw,44px); border-top:0;
-}
-.remedy-reading-sheet .remedy-synopsis h1 {
-  margin:12px 0 24px; font-size:clamp(38px,5.6vw,84px); line-height:1.12; letter-spacing:-.045em;
-}
-.remedy-reading-sheet .remedy-poster { max-width:335px; }
-.remedy-reading-sheet .remedy-film { padding:0 clamp(20px,6vw,105px) clamp(22px,4vw,64px); }
-.remedy-film .opening-media {
-  position:relative; inset:auto; width:100%; height:auto; aspect-ratio:16/9; margin:0 auto;
-  overflow:hidden; border-radius:9px; background:#0c1114; transform:none;
-}
-@media(max-width:760px) {
- .remedy-reading-sheet .remedy-poster { max-width:100%; }
- .remedy-reading-sheet .remedy-synopsis h1 { margin:8px 0 16px; }
- .remedy-reading-sheet .remedy-synopsis { gap:20px; }
-}
-
-.remedy-reading-sheet h1[tabindex="-1"]:focus { outline:none; }
-.remedy-film .opening-media { aspect-ratio:12/5; }
-.remedy-film .opening-media.has-started { aspect-ratio:16/9; }
 </style>
   <script>
     document.documentElement.className = 'js';
@@ -4405,8 +4365,12 @@ body[data-page="detail"] .theme-remedy .remedy-reading-sheet {
       <a href="#archive-stage" id="browse-gallery" class="intro-browse"><span class="visually-hidden" data-zh="浏览案例" data-en="Explore cases">浏览案例</span><span class="cta-label" data-zh="探索案例" data-en="Explore cases">探索案例</span><span aria-hidden="true">→</span></a>
     </div>
     <div class="reel-footer">
-      <div class="reel-credit"><span data-zh="放映中" data-en="On screen">放映中</span><button type="button" id="reel-credit"></button></div>
-      <div class="reel-controls"><button type="button" class="reel-arrow" id="reel-prev" aria-label="上一部">‹</button><button type="button" class="reel-arrow" id="reel-next" aria-label="下一部">›</button><div id="reel-chapters"></div><button type="button" id="reel-toggle"></button></div>
+      <div class="reel-controls">
+        <button type="button" class="reel-arrow" id="reel-prev" aria-label="上一部">‹</button>
+        <div class="reel-credit"><span data-zh="放映中" data-en="On screen">放映中</span><button type="button" id="reel-credit"></button></div>
+        <button type="button" class="reel-arrow" id="reel-next" aria-label="下一部">›</button>
+      </div>
+      <div id="reel-chapters"></div>
     </div>
   </section><section id="home-case-library" class="home-case-library" aria-label="案例分类入口">
   <svg class="home-folder-definitions" width="0" height="0" aria-hidden="true"><defs><clipPath id="home-folder-clip-front" clipPathUnits="userSpaceOnUse"><path/></clipPath><clipPath id="home-folder-clip-middle" clipPathUnits="userSpaceOnUse"><path/></clipPath><clipPath id="home-folder-clip-back" clipPathUnits="userSpaceOnUse"><path/></clipPath><clipPath id="home-folder-outside-front" clipPathUnits="userSpaceOnUse"><path clip-rule="evenodd"/></clipPath><clipPath id="home-folder-outside-middle" clipPathUnits="userSpaceOnUse"><path clip-rule="evenodd"/></clipPath></defs></svg>
@@ -5431,7 +5395,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 });
 </script>
 <script type="application/json" id="case-order">["remedy","spring","wind","xt5","david","chapter41","candy"]</script>
-<script type="application/json" id="case-records">{"spring":{"title":["早春晴朗","Early Spring, Clear Skies"],"kind":["影视 · 混合制作","Film & TV · Hybrid Production"],"team":["神力视界","Shenli Vision"],"line":["保留演员的实拍表演，替换窗景、延展地形，再用生成的云海接入正片。","Retain the filmed performances, replace the window views, extend the terrain and cut a generated cloudscape into the drama."],"note":["云海空镜　·　镜头生成","Cloudscape　·　Shot generation"],"clip":["云海空镜","Cloudscape"],"industries":[1],"poster":"media/a8e863b17dd780a06052c7978f58760e3d382f7fde49007abc29759b3c3b7823.jpg","video":"rotating-src/assets/story/original.mp4","source":"https://bytedance.larkoffice.com/wiki/IXkJws7aciM6uYkZ9W4cXtEAnxb","overview":["电视剧集《早春晴朗》的视效制作案例，由神力视界呈现实拍与 AI 的结合。","A visual-effects case study from the drama Early Spring, Clear Skies, presented by Shenli Vision."],"audience":"external","number":13,"screenings":[{"label":["完整视效集锦 · 1:10","Full VFX reel · 1:10"],"src":"rotating-src/assets/story/original.mp4"},{"label":["优酷 · 观看正剧","Youku · Watch the series"],"url":"https://v.youku.com/video?s=ffefaad54c434973b4d6"},{"label":["Netflix · 观看正剧","Netflix · Watch the series"],"url":"https://www.netflix.com/title/83067197"}],"fullVideo":"rotating-src/assets/story/original.mp4","pr":{"url":"https://mp.weixin.qq.com/s/oGfH_CS8jMA_BK5WwsPD9A","title":["《早春晴朗》爆火背后，请查看Seedance的隐藏戏份...","Behind Early Spring, Clear Skies: discover Seedance’s hidden role..."],"publisher":"火山引擎","date":"2026-11-04"},"subtype":"hybrid"},"wind":{"title":["追风","Wonder Boy"],"kind":["广告 · 短片","Advertising · Short Film"],"team":["火山引擎","Volcengine"],"line":["团队用 Seedance 2.5 把六秒脚本拆成七个定时镜头，并在另一段二十秒长镜头中只修改一名角色。","With Seedance 2.5, the team timed seven shots across a six-second script and revised one character in a separate twenty-second take."],"note":["片段　·　街头带球","Excerpt　·　Street football"],"clip":["街头带球","Street football"],"industries":[2],"poster":"media/fa5751a233e74da3d2aa25c34580f1224cdec48acdadc619984694d640ea22b1.jpg","video":"rotating-src/assets/article-media/wind/YDpcb4GkeoSSrDxcaX7cCPeonnf.mp4","source":"https://bytedance.larkoffice.com/wiki/EeovwSn3Vi97sPkHLEscikgInZg","overview":["《追风》是火山引擎与迈克尔·欧文合作的足球短片。一个在伦敦酒吧窗外看球的少年，随着电视里的解说，一路带球走上赛场。","Wonder Boy is a football short from Volcengine with Michael Owen. A London boy watches a match through a pub window, then takes the ball from the street onto the pitch."],"fullVideo":"rotating-src/assets/article-media/wind/YDpcb4GkeoSSrDxcaX7cCPeonnf.mp4","pr":{"url":"https://mp.weixin.qq.com/s/tSfAoa30uuwPsR7XhVA2VA","title":["《追风》项目报道","Wonder Boy · Project story"]},"cardOverview":["《追风》是火山引擎与迈克尔·欧文合作的足球短片。一个在伦敦酒吧窗外看球的少年，随着电视里的解说，一路带球走上赛场。","Wonder Boy is a football short from Volcengine with Michael Owen. A London boy watches a match through a pub window, then takes the ball from the street onto the pitch."],"audience":"external","number":12,"screenings":[{"label":["完整短片 · 1:45","Full short · 1:45"],"src":"rotating-src/assets/article-media/wind/YDpcb4GkeoSSrDxcaX7cCPeonnf.mp4","poster":"rotating-src/assets/article-media/wind/YDpcb4GkeoSSrDxcaX7cCPeonnf-poster.webp"}],"subtype":"short"},"xt5":{"title":["凯迪拉克","Cadillac"],"kind":["广告 · 混合制作","Advertising · Hybrid Production"],"team":["源然睿影","Yuanran Ruiying"],"line":["把真实车身留在画面里，再用 Seedance Studio 延展路跑背景、衔接转场。","The filmed car stays in frame while Seedance Studio helps extend the driving backgrounds and connect transitions."],"note":["凯迪拉克 · 品牌广告","Cadillac · Brand campaign"],"clip":["凯迪拉克 · 山路行车","Cadillac · Mountain drive"],"industries":[2],"poster":"media/398829bed25e207f79ca4261f76a4fb4fd57f0b6e43c700d32b757f7d1f180f9.jpg","video":"","source":"https://bytedance.larkoffice.com/wiki/Mf6Rwsa9uiLVlIksH9hcyuSsn6g","overview":["倪妮与樊振东分别主演了凯迪拉克「新／自由故事」的两支广告。源然睿影把 AI 接入实拍制作，保留现场拍下的车辆、演员与前景，再把车窗外的试车场变为沙丘，把棚内的岩石接进峡谷。","Ni Ni and Fan Zhendong star in two films from Cadillac’s New Freedom Stories campaign. Ryant AI Visuals retained the filmed cars, actors and foreground sets. The crew turned the test track beyond a windscreen into dunes and extended studio rocks into a canyon."],"pr":{"title":["凯迪拉克品牌上市新闻稿","Cadillac’s launch announcement"],"url":"https://news.gm.com.cn/zh/home.detail.html/Pages/news/cn/zh/2026/sept/0907-cadillac.html","publisher":"通用汽车","date":"2026-09-07"},"audience":"external","number":11,"screenings":[{"label":["倪妮篇 · 完整广告","Ni Ni · Full commercial"],"url":"https://www.xinpianchang.com/a13813673","embed":"https://player.xinpianchang.com/?aid=13813673&mid=oe3ZwvBlp0owJVvz","poster":"rotating-src/assets/article-media/xt5/nini-full-poster.webp"},{"label":["樊振东篇 · 完整广告","Fan Zhendong · Full commercial"],"url":"https://www.xinpianchang.com/a13813684","embed":"https://player.xinpianchang.com/?aid=13813684&mid=KdRx7bZn30b7b2N3","poster":"rotating-src/assets/article-media/xt5/fan-full-poster.webp"}],"fullVideo":"","subtype":"hybrid"},"candy":{"title":["Candy","Candy"],"team":["DiDi_OK","DiDi_OK"],"kind":["影视 · 短片","Film & TV · Short Film"],"line":["DiDi_OK 用四段短片镜头讲解 Seedance 2.5 如何处理动作、运动与材质。","DiDi_OK uses four shots from the short to show how Seedance 2.5 handles action, motion and materials."],"industries":[1],"poster":"rotating-src/assets/article-media/candy/official-poster.webp","video":"rotating-src/assets/article-media/candy/candy-full.mp4","source":"https://bytedance.larkoffice.com/wiki/JiUhwgNoviVfUmkXrLvcRTCznyK","overview":["土卫十八脱离轨道后，一条奇怪的规则降临地球：谁想伤害别人，谁就会在动手前变成一地彩色硬糖。导演 DiDi_OK 用这条规则搭起《Candy》的世界，影片画面由 Seedance 2.5 生成。","After Saturn’s moon Pan leaves its orbit, a strange rule takes hold on Earth. Anyone who intends to hurt someone turns into a shower of hard candy before they can act. Director DiDi_OK built the world of Candy around that rule and used Seedance 2.5 to generate the film’s imagery."],"stillPreview":true,"audience":"external","number":7,"screenings":[{"label":["完整短片 · 8:59","Full short · 8:59"],"url":"https://www.bilibili.com/video/BV1WuYh6VEaS/","src":"rotating-src/assets/article-media/candy/candy-full.mp4","poster":"rotating-src/assets/article-media/candy/official-poster.webp","autoplay":false}],"fullVideo":"rotating-src/assets/article-media/candy/candy-full.mp4","subtype":"short"},"david":{"title":["House of David","House of David"],"team":["Jon Erwin 团队","Jon Erwin’s team"],"kind":["影视 · 混合制作","Film & TV · Hybrid Production"],"line":["乔恩·欧文的团队把生成式预演带进片场。案例展示火焰测试、动作预演和特写镜头在混合制作中的用法。","Jon Erwin’s team brings generative visualization onto the set. The case includes fire tests, stunt visualization and close-up tests."],"industries":[1],"poster":"media/e3aa0f572dfb79829cf4f8d6b65e7c0647eaf9269715c42fdd64aaec3cf7054a.jpg","video":"","source":"","overview":["Jon Erwin 的剧组用实拍锁定表演，再为火光、地点和特技动作构建数字画面。","Jon Erwin’s crew anchored shots in recorded performances, then built digital firelight, locations and action around them."],"audience":"internal","number":10,"screenings":[{"label":["Prime Video · 观看剧集","Prime Video · Watch the series"],"url":"https://www.primevideo.com/detail/0FDRQYNQWZ8H8H1YL6G9P4N0G9"},{"label":["官方预告","Official trailer"],"url":"https://www.youtube.com/watch?v=GrGfIHBIVL4","embed":"https://www.youtube-nocookie.com/embed/GrGfIHBIVL4"}],"fullVideo":"","subtype":"hybrid"},"chapter41":{"title":["Volcano High","Volcano High"],"team":["Chapter 41","Chapter 41"],"kind":["影视 · 混合制作","Film & TV · Hybrid Production"],"line":["从《Volcano High》预告和实拍对照，看 Chapter41 如何在拍摄现场预演尚未完成的世界。","The Volcano High teaser and side-by-side comparisons show how Chapter41 previews an unfinished world on set."],"industries":[1],"poster":"rotating-src/assets/article-media/chapter41/teaser-poster.jpg","video":"rotating-src/assets/article-media/chapter41/teaser.mp4","source":"https://bytedance.larkoffice.com/wiki/UPYWwnDTQi7tdukQsxTcCxfbnAc","overview":["《Volcano High》把一出舞台剧搬进不断变形的校园。演员和摄影机走过真实的房间，Chapter41 再用 Seedance 2.5 等模型重新布置人物身边的世界。","Volcano High takes a stage play into a school that keeps changing shape. The actors and camera move through real rooms. Chapter41 uses models including Seedance 2.5 to rebuild the world around them."],"fullVideo":"rotating-src/assets/article-media/chapter41/teaser.mp4","fullVideoLabel":["完整官方预告 · 1:26","Full official teaser · 1:26"],"audience":"external","number":8,"screenings":[{"label":["官方预告 · 1:26","Official teaser · 1:26"],"src":"rotating-src/assets/article-media/chapter41/teaser.mp4","poster":"rotating-src/assets/article-media/chapter41/teaser-poster.jpg"}],"subtype":"hybrid"},"remedy":{"title":["小城良方","Small Town Remedy"],"kind":["影视 · 混合制作","Film & TV · Hybrid Production"],"team":["神力视界","Horizon Visual Effects"],"line":["神力视界把 Seedance 生成的画面合入实拍镜头。列车戏保留演员和车厢，把窗外的绿幕换成掠过的街景。冰下戏保留演员的表演，调整冰纹和透光，让观众隔着冰层也能看清他的眼神。","Horizon Visual Effects combined Seedance imagery with live-action footage. In the train scene, the actors and carriage stay in the shot while a passing cityscape replaces the green screen beyond the window. In the ice scene, the team adjusted the cracks and the light passing through them so the actor’s eyes remain visible."],"clip":["冰层下的面孔","A face beneath the ice"],"industries":[1],"poster":"rotating-src/assets/article-media/remedy/seedance-poster-landscape.jpg","video":"rotating-src/assets/article-media/remedy/vfx-reel.mp4","fullVideo":"rotating-src/assets/article-media/remedy/vfx-reel.mp4","source":"https://bytedance.larkoffice.com/wiki/NpWvwzXkJixiuQkyX2RcsHmhnwb","overview":["医疗剧《小城良方》讲述神经外科医生刘铮亮（肖战 饰）回到东北故乡抚城，在小西门医院重新接诊的故事。","In Small Town Remedy, neurosurgeon Liu Zhengliang, played by Xiao Zhan, returns to his northeastern hometown of Fucheng to treat patients at Xiaoximen Hospital."],"fullVideoLabel":["完整视效制作演示 · 2:19","Full VFX breakdown · 2:19"],"cardOverview":["医疗剧《小城良方》讲述神经外科医生刘铮亮（肖战 饰）回到东北故乡抚城，在小西门医院重新接诊的故事。","In Small Town Remedy, neurosurgeon Liu Zhengliang, played by Xiao Zhan, returns to his northeastern hometown of Fucheng to treat patients at Xiaoximen Hospital."],"audience":"external","number":14,"screenings":[{"label":["完整视效制作演示 · 2:19","Full VFX breakdown · 2:19"],"src":"rotating-src/assets/article-media/remedy/vfx-reel.mp4","poster":"rotating-src/assets/article-media/remedy/vfx-reel-title.jpg","autoplay":false}],"subtype":"hybrid"}}</script>
+<script type="application/json" id="case-records">{"spring":{"title":["早春晴朗","Early Spring, Clear Skies"],"kind":["影视 · 混合制作","Film & TV · Hybrid Production"],"team":["神力视界","Shenli Vision"],"line":["保留演员的实拍表演，替换窗景、延展地形，再用生成的云海接入正片。","Retain the filmed performances, replace the window views, extend the terrain and cut a generated cloudscape into the drama."],"note":["云海空镜　·　镜头生成","Cloudscape　·　Shot generation"],"clip":["云海空镜","Cloudscape"],"industries":[1],"poster":"media/a8e863b17dd780a06052c7978f58760e3d382f7fde49007abc29759b3c3b7823.jpg","video":"rotating-src/assets/story/original.mp4","source":"https://bytedance.larkoffice.com/wiki/IXkJws7aciM6uYkZ9W4cXtEAnxb","overview":["电视剧集《早春晴朗》的视效制作案例，由神力视界呈现实拍与 AI 的结合。","A visual-effects case study from the drama Early Spring, Clear Skies, presented by Shenli Vision."],"audience":"external","number":13,"screenings":[{"label":["完整视效集锦 · 1:10","Full VFX reel · 1:10"],"src":"rotating-src/assets/story/original.mp4"},{"label":["优酷 · 观看正剧","Youku · Watch the series"],"url":"https://v.youku.com/video?s=ffefaad54c434973b4d6"},{"label":["Netflix · 观看正剧","Netflix · Watch the series"],"url":"https://www.netflix.com/title/83067197"}],"fullVideo":"rotating-src/assets/story/original.mp4","pr":{"url":"https://mp.weixin.qq.com/s/oGfH_CS8jMA_BK5WwsPD9A","title":["《早春晴朗》爆火背后，请查看Seedance的隐藏戏份...","Behind Early Spring, Clear Skies: discover Seedance’s hidden role..."],"publisher":"火山引擎","date":"2026-11-04"},"subtype":"hybrid"},"wind":{"title":["追风","Wonder Boy"],"kind":["广告 · 短片","Advertising · Short Film"],"team":["火山引擎","Volcengine"],"line":["团队用 Seedance 2.5 把六秒脚本拆成七个定时镜头，并在另一段二十秒长镜头中只修改一名角色。","With Seedance 2.5, the team timed seven shots across a six-second script and revised one character in a separate twenty-second take."],"note":["片段　·　街头带球","Excerpt　·　Street football"],"clip":["街头带球","Street football"],"industries":[2],"poster":"media/fa5751a233e74da3d2aa25c34580f1224cdec48acdadc619984694d640ea22b1.jpg","video":"rotating-src/assets/article-media/wind/YDpcb4GkeoSSrDxcaX7cCPeonnf.mp4","source":"https://bytedance.larkoffice.com/wiki/EeovwSn3Vi97sPkHLEscikgInZg","overview":["《追风》是火山引擎与迈克尔·欧文合作的足球短片。一个在伦敦酒吧窗外看球的少年，随着电视里的解说，一路带球走上赛场。","Wonder Boy is a football short from Volcengine with Michael Owen. A London boy watches a match through a pub window, then takes the ball from the street onto the pitch."],"fullVideo":"rotating-src/assets/article-media/wind/YDpcb4GkeoSSrDxcaX7cCPeonnf.mp4","pr":{"url":"https://mp.weixin.qq.com/s/tSfAoa30uuwPsR7XhVA2VA","title":["《追风》项目报道","Wonder Boy · Project story"]},"cardOverview":["《追风》是火山引擎与迈克尔·欧文合作的足球短片。一个在伦敦酒吧窗外看球的少年，随着电视里的解说，一路带球走上赛场。","Wonder Boy is a football short from Volcengine with Michael Owen. A London boy watches a match through a pub window, then takes the ball from the street onto the pitch."],"audience":"external","number":12,"screenings":[{"label":["完整短片 · 1:45","Full short · 1:45"],"src":"rotating-src/assets/article-media/wind/YDpcb4GkeoSSrDxcaX7cCPeonnf.mp4","poster":"rotating-src/assets/article-media/wind/YDpcb4GkeoSSrDxcaX7cCPeonnf-poster.webp"}],"subtype":"short"},"xt5":{"title":["凯迪拉克","Cadillac"],"kind":["广告 · 混合制作","Advertising · Hybrid Production"],"team":["源然睿影","Yuanran Ruiying"],"line":["把真实车身留在画面里，再用 Seedance Studio 延展路跑背景、衔接转场。","The filmed car stays in frame while Seedance Studio helps extend the driving backgrounds and connect transitions."],"note":["凯迪拉克 · 品牌广告","Cadillac · Brand campaign"],"clip":["凯迪拉克 · 山路行车","Cadillac · Mountain drive"],"industries":[2],"poster":"media/398829bed25e207f79ca4261f76a4fb4fd57f0b6e43c700d32b757f7d1f180f9.jpg","video":"","source":"https://bytedance.larkoffice.com/wiki/Mf6Rwsa9uiLVlIksH9hcyuSsn6g","overview":["倪妮与樊振东分别主演了凯迪拉克「新／自由故事」的两支广告。源然睿影把 AI 接入实拍制作，保留现场拍下的车辆、演员与前景，再把车窗外的试车场变为沙丘，把棚内的岩石接进峡谷。","Ni Ni and Fan Zhendong star in two films from Cadillac’s New Freedom Stories campaign. Ryant AI Visuals retained the filmed cars, actors and foreground sets. The crew turned the test track beyond a windscreen into dunes and extended studio rocks into a canyon."],"pr":{"title":["凯迪拉克品牌上市新闻稿","Cadillac’s launch announcement"],"url":"https://news.gm.com.cn/zh/home.detail.html/Pages/news/cn/zh/2026/sept/0907-cadillac.html","publisher":"通用汽车","date":"2026-09-07"},"audience":"external","number":11,"screenings":[{"label":["倪妮篇 · 完整广告","Ni Ni · Full commercial"],"url":"https://www.xinpianchang.com/a13813673","embed":"https://player.xinpianchang.com/?aid=13813673&mid=oe3ZwvBlp0owJVvz","poster":"rotating-src/assets/article-media/xt5/nini-full-poster.webp"},{"label":["樊振东篇 · 完整广告","Fan Zhendong · Full commercial"],"url":"https://www.xinpianchang.com/a13813684","embed":"https://player.xinpianchang.com/?aid=13813684&mid=KdRx7bZn30b7b2N3","poster":"rotating-src/assets/article-media/xt5/fan-full-poster.webp"}],"fullVideo":"","subtype":"hybrid"},"candy":{"title":["Candy","Candy"],"team":["DiDi_OK","DiDi_OK"],"kind":["影视 · 短片","Film & TV · Short Film"],"line":["DiDi_OK 用四段短片镜头讲解 Seedance 2.5 如何处理动作、运动与材质。","DiDi_OK uses four shots from the short to show how Seedance 2.5 handles action, motion and materials."],"industries":[1],"poster":"rotating-src/assets/article-media/candy/official-poster.webp","video":"rotating-src/assets/article-media/candy/candy-full.mp4","source":"https://bytedance.larkoffice.com/wiki/JiUhwgNoviVfUmkXrLvcRTCznyK","overview":["土卫十八脱离轨道后，一条奇怪的规则降临地球：谁想伤害别人，谁就会在动手前变成一地彩色硬糖。导演 DiDi_OK 用这条规则搭起《Candy》的世界，影片画面由 Seedance 2.5 生成。","After Saturn’s moon Pan leaves its orbit, a strange rule takes hold on Earth. Anyone who intends to hurt someone turns into a shower of hard candy before they can act. Director DiDi_OK built the world of Candy around that rule and used Seedance 2.5 to generate the film’s imagery."],"stillPreview":true,"audience":"external","number":7,"screenings":[{"label":["完整短片 · 8:59","Full short · 8:59"],"url":"https://www.bilibili.com/video/BV1WuYh6VEaS/","src":"rotating-src/assets/article-media/candy/candy-full.mp4","poster":"rotating-src/assets/article-media/candy/official-poster.webp","autoplay":false}],"fullVideo":"rotating-src/assets/article-media/candy/candy-full.mp4","subtype":"short"},"david":{"title":["House of David","House of David"],"team":["Jon Erwin 团队","Jon Erwin’s team"],"kind":["影视 · 混合制作","Film & TV · Hybrid Production"],"line":["乔恩·欧文的团队把生成式预演带进片场。案例展示火焰测试、动作预演和特写镜头在混合制作中的用法。","Jon Erwin’s team brings generative visualization onto the set. The case includes fire tests, stunt visualization and close-up tests."],"industries":[1],"poster":"media/e3aa0f572dfb79829cf4f8d6b65e7c0647eaf9269715c42fdd64aaec3cf7054a.jpg","video":"","source":"","overview":["Jon Erwin 的剧组用实拍锁定表演，再为火光、地点和特技动作构建数字画面。","Jon Erwin’s crew anchored shots in recorded performances, then built digital firelight, locations and action around them."],"audience":"internal","number":10,"screenings":[{"label":["Prime Video · 观看剧集","Prime Video · Watch the series"],"url":"https://www.primevideo.com/detail/0FDRQYNQWZ8H8H1YL6G9P4N0G9"},{"label":["官方预告","Official trailer"],"url":"https://www.youtube.com/watch?v=GrGfIHBIVL4","embed":"https://www.youtube-nocookie.com/embed/GrGfIHBIVL4"}],"fullVideo":"","subtype":"hybrid"},"chapter41":{"title":["Volcano High","Volcano High"],"team":["Chapter 41","Chapter 41"],"kind":["影视 · 混合制作","Film & TV · Hybrid Production"],"line":["从《Volcano High》预告和实拍对照，看 Chapter41 如何在拍摄现场预演尚未完成的世界。","The Volcano High teaser and side-by-side comparisons show how Chapter41 previews an unfinished world on set."],"industries":[1],"poster":"rotating-src/assets/article-media/chapter41/teaser-poster.jpg","video":"rotating-src/assets/article-media/chapter41/teaser.mp4","source":"https://bytedance.larkoffice.com/wiki/UPYWwnDTQi7tdukQsxTcCxfbnAc","overview":["《Volcano High》把一出舞台剧搬进不断变形的校园。演员和摄影机走过真实的房间，Chapter41 再用 Seedance 2.5 等模型重新布置人物身边的世界。","Volcano High takes a stage play into a school that keeps changing shape. The actors and camera move through real rooms. Chapter41 uses models including Seedance 2.5 to rebuild the world around them."],"fullVideo":"rotating-src/assets/article-media/chapter41/teaser.mp4","fullVideoLabel":["完整官方预告 · 1:26","Full official teaser · 1:26"],"audience":"external","number":8,"screenings":[{"label":["官方预告 · 1:26","Official teaser · 1:26"],"src":"rotating-src/assets/article-media/chapter41/teaser.mp4","poster":"rotating-src/assets/article-media/chapter41/teaser-poster.jpg"}],"subtype":"hybrid"},"remedy":{"title":["小城良方","Small Town Remedy"],"kind":["影视 · 混合制作","Film & TV · Hybrid Production"],"team":["神力视界","Horizon Visual Effects"],"line":["神力视界把 Seedance 生成的画面合入实拍镜头。列车戏保留车厢和演员，替换窗外移动的景色。冰下戏保留演员的动作和位置，在人物周围合成冰层。","Horizon Visual Effects composited Seedance imagery into the live-action shots. In the train scene, the carriage and actors stay in the frame while the view outside the window changes. In the ice scene, the actors keep their positions and movements as the ice is composited around them."],"clip":["冰层下的面孔","A face beneath the ice"],"industries":[1],"poster":"rotating-src/assets/article-media/remedy/seedance-poster-landscape.jpg","video":"rotating-src/assets/article-media/remedy/vfx-reel.mp4","fullVideo":"rotating-src/assets/article-media/remedy/vfx-reel.mp4","source":"https://bytedance.larkoffice.com/wiki/NpWvwzXkJixiuQkyX2RcsHmhnwb","overview":["医疗剧《小城良方》讲述神经外科医生刘铮亮（肖战 饰）回到东北故乡抚城，在小西门医院重新接诊的故事。","In Small Town Remedy, neurosurgeon Liu Zhengliang, played by Xiao Zhan, returns to his northeastern hometown of Fucheng to treat patients at Xiaoximen Hospital."],"fullVideoLabel":["完整视效制作演示 · 2:19","Full VFX breakdown · 2:19"],"cardOverview":["医疗剧《小城良方》讲述神经外科医生刘铮亮（肖战 饰）回到东北故乡抚城，在小西门医院重新接诊的故事。","In Small Town Remedy, neurosurgeon Liu Zhengliang, played by Xiao Zhan, returns to his northeastern hometown of Fucheng to treat patients at Xiaoximen Hospital."],"audience":"external","number":14,"screenings":[{"label":["完整视效制作演示 · 2:19","Full VFX breakdown · 2:19"],"src":"rotating-src/assets/article-media/remedy/vfx-reel.mp4","poster":"rotating-src/assets/article-media/remedy/vfx-reel-title.jpg"}],"subtype":"hybrid"}}</script>
 <script type="application/json" id="reel-data">[{"key":"wind","video":"rotating-src/assets/banner/wind.mp4","poster":"rotating-src/assets/banner/wind.jpg"},{"key":"xt5","video":"rotating-src/assets/banner/xt5.mp4","poster":"rotating-src/assets/banner/xt5.jpg"},{"key":"spring","video":"rotating-src/assets/banner/spring.mp4","poster":"rotating-src/assets/banner/spring.jpg"},{"key":"remedy","video":"rotating-src/assets/banner/remedy.mp4","poster":"rotating-src/assets/banner/remedy.jpg"},{"key":"candy","video":"rotating-src/assets/banner/candy.mp4","poster":"rotating-src/assets/article-media/candy/official-poster.webp","mobileVideo":"rotating-src/assets/banner/candy-mobile.mp4"}]</script>
 <script type="application/json" id="archive-dates">{"spring":{"number":13,"archivedOn":"2026-11-11","updatedOn":null},"wind":{"number":12,"archivedOn":"2026-11-11","updatedOn":"2026-11-23"},"xt5":{"number":11,"archivedOn":"2026-11-11","updatedOn":null},"david":{"number":10,"archivedOn":"2026-11-11","updatedOn":"2026-11-11"},"chapter41":{"number":8,"archivedOn":"2026-11-11","updatedOn":"2026-11-06"},"candy":{"number":7,"archivedOn":"2026-11-11","updatedOn":"2026-10-30"},"remedy":{"number":14,"archivedOn":"2026-11-23","updatedOn":null}}</script>
 <script type="application/json" id="story-data">[{"id":"window","tags":["environment","consistency"],"section":"editing","title":{"zh":"车窗换景，保住前景关系。","en":"A new view, the same foreground."},"summary":{"zh":"在实拍车窗后替换环境，人物与车体仍然留在原来的空间关系里。","en":"Replace the environment beyond a live-action car window while retaining the relationship between performer and vehicle."},"note":{"zh":"人物边缘、车窗遮挡与背景视角。","en":"Performer edges, window occlusion and background perspective."},"video":"media/01aae1a7976477933cf8aaf654f0303c0261bb13af4c30e7070be698a91d9237.mp4","poster":"media/69fd83fe28f8deb6e4157254dfa3d05694e6756c0c9b96473c39b1af494848dd.jpg"},{"id":"interior","tags":["environment"],"section":"editing","title":{"zh":"把窗外，接进室内。","en":"Bring the outside into the scene."},"summary":{"zh":"室内窗景与城市背景的前后对照，展示环境变化如何接上已有机位。","en":"A before-and-after comparison of an interior window view and city background shows how a new environment fits an existing camera angle."},"note":{"zh":"窗框、室内前景与远处建筑的透视。","en":"Window frames, interior foreground and the perspective of distant buildings."},"video":"media/a805b3b3bddcd92530a9fcb5aabefa811e9cbbe339e3c76715b8c1c8f78704c9.mp4","poster":"media/e1f563854690bafdfbdffcd80b340bace0da73dea92607ab1108bb6450bd187d.jpg"},{"id":"terrain","tags":["extension","consistency"],"section":"editing","title":{"zh":"从脚下的地面，延伸到远方。","en":"Extend the location beyond the frame."},"summary":{"zh":"保留实拍人物与近景地形，在远处补出荒漠地貌与更深的空间。","en":"Keep the live-action performers and near terrain, extending the landscape into a deeper desert environment."},"note":{"zh":"脚下接触面、远近层次与地平线。","en":"Ground contact, depth layers and the horizon."},"video":"media/f83bfca8cfdda5dacee1ca59877432d2bd44aa154c2a178a27e987c669c1e2f7.mp4","poster":"media/ce3120dfa814ac2e9b9221efc001dc78908ae613d5800108edfd271d8f07ff32.jpg"},{"id":"fire","tags":["atmosphere","consistency"],"section":"editing","title":{"zh":"同一段表演，另一种氛围。","en":"One performance. A different atmosphere."},"summary":{"zh":"沿用篝火场景里的实拍表演，调整天空与环境光，让人物融入新的时间感。","en":"Retain the live-action performance in a campfire scene while changing the sky and ambient light to establish a new time of day."},"note":{"zh":"天空色彩、脸部亮度与火光的关系。","en":"Sky colour, facial exposure and the relationship to firelight."},"video":"media/beaa0ec883b59055b8869af0edac5907ac32dfd54ba04e9bc5a5620237e1e226.mp4","poster":"media/98d23e0dbe7eaae56b1114626cfae9dfcf248f5b8c366b1384e5e678babe28b4.jpg"},{"id":"screen","tags":["screen","atmosphere"],"section":"editing","title":{"zh":"屏幕里的晚霞，也在此刻。","en":"The sunset on screen belongs to this moment."},"summary":{"zh":"车内手机画面的替换，让屏幕中的景色与人物所处环境呼应。","en":"Replace the phone display inside a car so the image on screen corresponds with the character’s surroundings."},"note":{"zh":"手机边缘、反光，以及屏幕与窗外的时间感。","en":"Phone edges, reflections and the time of day on screen and outside."},"video":"media/963b7e91e7cbfc735d167782034aa7fa0cab3fa0d0d3cad5719d780d45430018.mp4","poster":"media/12fb86fea5c6b60c27254f0984b90480f2984c34ea5368a2edfe06dc64eda42a.jpg"},{"id":"wardrobe","tags":["wardrobe","consistency"],"section":"editing","title":{"zh":"调整造型，保留表演。","en":"Change the wardrobe. Preserve the performance."},"summary":{"zh":"材料附例中，同一条厨房戏的深色上衣换成浅灰色针织衫，围裙、手部动作、灶台摆件和机位延续。","en":"In an additional example included in the material, a dark top becomes a light-grey knit while the apron, hand movements, kitchen props and camera angle carry through."},"note":{"zh":"上衣接缝、围裙边缘和手臂运动的连续性。","en":"Garment seams, apron edges and continuity of arm movement."},"video":"media/26aa669e6069936c0ad5eba3e648a56a153e125fe3986a9810b78ea7cb9088aa.mp4","poster":"media/3f6380c072c2e56de4ae1e139b55dc1489736818ff3a2c54d04f677ba9e02a23.jpg"},{"id":"clouds","tags":["shot-generation","atmosphere"],"section":"generation","title":{"zh":"把难等的云海，变成可设计的镜头。","en":"Turn an elusive cloudscape into a designed shot."},"summary":{"zh":"用参考图与提示词控制云海、山体、光线与色调，以山脊和云层建立空间，再用日出暖光交代清晨。","en":"Guide the clouds, mountains, lighting and colour with reference images and prompts. Mountain ridges establish the space, while warm sunrise light establishes morning."},"note":{"zh":"山脊露出的比例、雾中层次与日出方向。","en":"The visible mountain ridges, layers in the mist and the direction of sunrise."},"video":"media/06aa06bb0de765ecd714b139e24bb0a6fa336605b3645105709f2f313ab7ca85.mp4","poster":"media/01f4eb1e7c92abf88f7d823ff3e9f96aad99631e8d88322dbbacc5f97f27a126.jpg"},{"id":"rock","tags":["shot-generation","extension","consistency"],"section":"generation","title":{"zh":"人物与岩台留住，远景重新展开。","en":"Keep the performer. Open up the distance."},"summary":{"zh":"对照岩台镜头的底片与成片，人物与岩台保留，远处的雾底变成更有层次的云海。","en":"Compare the original and finished rock-platform shot. The performer and platform remain, while distant mist becomes a layered sea of clouds."},"note":{"zh":"岩台边缘、云层高度与人物的空间关系。","en":"Platform edges, cloud height and the performer’s relationship to the space."},"video":"media/8f29ec12835fe72a088553e33e4c9ce8afc0d04da729c7734a031352e8f15980.mp4","poster":"media/9a30eea780a3ed19347b6d6b7147eee127d86680fad3a2c75c7b8f14f678232e.jpg"},{"id":"debris","tags":["shot-generation","atmosphere"],"section":"generation","title":{"zh":"高风险场面，在画面里完成。","en":"Create the hazardous moment in the image."},"summary":{"zh":"泥石流与雨夜行车片段，展示难以在现场控制的效果如何与实拍段落衔接。","en":"A debris flow and rainy-night driving sequence shows how effects that are difficult to control on set can connect with live action."},"note":{"zh":"运动方向、速度、重量感与前后镜头衔接。","en":"Direction, speed, weight and continuity with adjacent shots."},"video":"media/648ffffd6ac6fd323b374351d7ea55942f74ff421fe7bc28648887e6c5f1e265.mp4","poster":"media/be673410bb4491a621d088c7e9d69c154f8a29050273f35742f254b33d6266c6.jpg"}]</script>
@@ -5740,7 +5704,7 @@ function renderSpringChapters({item, clips, text, escape}) {
 }
 </script>
 <script>/* Documentary shots keep the same numbering in the reading rail and the article. */
-function renderRemedyArticle({article, item, text, escape, screening}) {
+function renderRemedyArticle({article, item, text, escape}) {
   const tr = value => escape(text(...value));
   const asset = file => 'rotating-src/assets/article-media/remedy/' + escape(file);
   const id = key => 'remedy-' + key;
@@ -5766,8 +5730,7 @@ function renderRemedyArticle({article, item, text, escape, screening}) {
   const methods = article.takeaways.map(method=>'<section><h3>'+icon(method.icon)+tr(method.title)+'</h3><p>'+tr(method.copy)+'</p>'+picture(method.still,tr(method.case))+'<a class="remedy-example-link" href="#'+id(method.target)+'" data-essay-jump="'+id(method.target)+'">'+tr(method.case)+' ↑</a></section>').join('');
   const links = ext('feishu',text('飞书网页版','Feishu web edition'),item.source)+(item.pr?ext('pr',text('PR 文章','Press article'),item.pr.url):'');
   return '<article class="case-essay case-essay--spread case-essay--hybrid remedy-article" aria-label="'+tr(item.title)+'">'+
-    '<section class="remedy-synopsis" id="remedy-synopsis"><button type="button" class="remedy-image remedy-poster" data-case-still aria-label="'+text('放大海报','Enlarge poster')+'"><picture><source media="(max-width: 760px)" srcset="'+asset(article.posterLandscape)+'"><img src="'+asset(article.poster)+'" alt="'+tr(article.posterCredit)+'" loading="lazy"></picture></button><div class="remedy-intro-copy"><p class="remedy-label remedy-kicker">'+tr(item.kind)+'　/　'+tr(item.team)+'</p><div class="opening-heading"><h1>'+tr(article.overviewTitle)+'</h1></div><p class="remedy-plot">'+tr(article.overview)+'</p><p class="remedy-technique">'+tr(article.technique)+'</p></div></section>'+
-    '<section class="remedy-film" id="case-film" aria-label="'+text('完整视效制作演示','Full VFX breakdown')+'"><div class="opening-media">'+screening+'</div></section>'+
+    '<section class="remedy-synopsis" id="remedy-synopsis"><button type="button" class="remedy-image remedy-poster" data-case-still aria-label="'+text('放大海报','Enlarge poster')+'"><picture><source media="(max-width: 760px)" srcset="'+asset(article.posterLandscape)+'"><img src="'+asset(article.poster)+'" alt="'+tr(article.posterCredit)+'" loading="lazy"></picture></button><div class="remedy-intro-copy"><h2>'+tr(article.overviewTitle)+'</h2><p class="remedy-plot">'+tr(article.overview)+'</p><p class="remedy-technique">'+tr(article.technique)+'</p></div></section>'+
     '<section class="remedy-overview" id="remedy-overview"><h2>'+text('AI 与实拍如何分工','Where AI enters the live-action workflow')+'</h2><div>'+overview+'</div></section>'+
     '<div class="case-shot-reading">'+rail+'<div class="case-shot-chapters">'+groups+'</div></div>'+
     '<section class="remedy-methods" id="remedy-methods"><h2>'+text('从边缘、透光与重量看合成','Reading a composite through edges, light and weight')+'</h2><div class="remedy-method-grid">'+methods+'</div><nav class="remedy-sources">'+links+'<a href="#/cases">'+text('返回案例分类','Back to categories')+' ↗</a></nav></section></article>';
@@ -5793,7 +5756,7 @@ function caseLinkIcon(kind) {
   return '<svg class="case-link-icon" viewBox="0 0 20 20" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + shape + '</svg>';
 }
 
-function renderCaseArticle({ article, item, key, text, escape, mediaMap = {}, missing = {}, screening = '' }) {
+function renderCaseArticle({ article, item, key, text, escape, mediaMap = {}, missing = {} }) {
   const local = value => escape(Array.isArray(value) ? text(value[0], value[1]) : value);
   const safeLink = value => {
     try { const url = new URL(value); return url.protocol === 'https:' ? escape(url.href) : ''; }
@@ -5805,7 +5768,7 @@ function renderCaseArticle({ article, item, key, text, escape, mediaMap = {}, mi
     return '<section class="essay-unavailable"><a href="' + safeLink(item.source) + '"' + open + '>' +
       text('阅读飞书完整案例', 'Read the complete case on Feishu') + ' ' + arrow + '</a></section>';
   }
-  if (key === 'remedy' && article.groups) return renderRemedyArticle({article, item, text, escape, screening});
+  if (key === 'remedy' && article.groups) return renderRemedyArticle({article, item, text, escape});
   function articleIcon(value) {
     if (!value) return '';
     const file = caseArticleAsset(key, value);
@@ -6367,11 +6330,8 @@ function bindCaseStills(root, text) {
       '</div><div class="screening-choices">' + choices + '</div><div class="screening-origin"></div>';
     const chapters = key === 'spring'
       ? renderSpringChapters({item, clips:storyClips, text, escape, tags})
-      : renderCaseArticle({article:articleData[key], item, key, text, escape, tags, mediaMap:articleMedia, missing:missingArticleMedia, screening:media});
-    const editorialOpening = key === 'remedy';
-    root.innerHTML=editorialOpening
-      ? '<div class="case-reading-sheet remedy-reading-sheet" id="case-reading"><div id="case-reading-body">'+chapters+'</div></div>'
-      : '<section class="case-opening" id="case-film" aria-label="'+text('影片与项目概览','Film and project overview')+'"><div class="case-stage"><div class="opening-media" style="view-transition-name:case-media">'+media+'</div><div class="opening-title"><div class="opening-heading"><h1>'+escape(item.title[getLanguage()])+'</h1>'+caseAudienceMarkup(item,getLanguage())+'</div><p class="opening-team">'+escape(item.team[getLanguage()])+'</p><div class="card-tags opening-tags">'+tags(item)+'</div><p class="opening-summary">'+escape((item.overview||item.line)[getLanguage()])+'</p><div class="opening-highlights"><span>'+text('核心亮点','Key highlights')+'</span><p>'+escape(item.line[getLanguage()])+'</p></div>'+'<div class="opening-meta-row">'+(item.source?'<a class="opening-source" href="'+escape(item.source)+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('feishu')+'<span>'+text('飞书网页版','Feishu web edition')+' ↗</span></a>':'')+(item.pr?'<a class="opening-pr" href="'+item.pr.url+'" title="'+escape(item.pr.title[getLanguage()])+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('pr')+text('PR 文章','PR article')+' ↗</a>':'')+'</div></div><span class="opening-hint">'+text('向下滚动，了解这个案例','Scroll to explore this case')+' ↓</span></div></section>'+
+      : renderCaseArticle({article:articleData[key], item, key, text, escape, tags, mediaMap:articleMedia, missing:missingArticleMedia});
+    root.innerHTML='<section class="case-opening" id="case-film" aria-label="'+text('影片与项目概览','Film and project overview')+'"><div class="case-stage"><div class="opening-media" style="view-transition-name:case-media">'+media+'</div><div class="opening-title"><div class="opening-heading"><h1>'+escape(item.title[getLanguage()])+'</h1>'+caseAudienceMarkup(item,getLanguage())+'</div><p class="opening-team">'+escape(item.team[getLanguage()])+'</p><div class="card-tags opening-tags">'+tags(item)+'</div><p class="opening-summary">'+escape((item.overview||item.line)[getLanguage()])+'</p><div class="opening-highlights"><span>'+text('核心亮点','Key highlights')+'</span><p>'+escape(item.line[getLanguage()])+'</p></div>'+'<div class="opening-meta-row">'+(item.source?'<a class="opening-source" href="'+escape(item.source)+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('feishu')+'<span>'+text('飞书网页版','Feishu web edition')+' ↗</span></a>':'')+(item.pr?'<a class="opening-pr" href="'+item.pr.url+'" title="'+escape(item.pr.title[getLanguage()])+'" target="_blank" rel="noopener noreferrer">'+caseLinkIcon('pr')+text('PR 文章','PR article')+' ↗</a>':'')+'</div></div><span class="opening-hint">'+text('向下滚动，了解这个案例','Scroll to explore this case')+' ↓</span></div></section>'+
       '<div class="case-reading-sheet" id="case-reading"><div class="reading-sheet-intro"><span>'+text('深度案例 · 创作拆解','Case study · Inside the process')+'</span><a href="#case-reading-body" data-reading-target="case-reading-body">'+text('开始阅读','Explore the case')+' ↓</a></div><div id="case-reading-body">'+chapters+'</div></div>';
     root.insertAdjacentHTML('beforeend',renderIndexFooter(getLanguage()));
     bindIndexFooters(root);
@@ -6433,20 +6393,6 @@ function bindCaseStills(root, text) {
       viewer.addEventListener('click', event => { if (event.target === viewer) viewer.close(); });
     }
     const stopStills = bindCaseStills(root, text);
-    if (editorialOpening) {
-      screen.querySelector('video')?.addEventListener('play', () => screen.classList.add('has-started'), {once:true});
-      document.body.classList.add('detail-header-shown');
-      const stopObserver = playVisible();
-      const reveal = () => refreshFooterReveal();
-      addEventListener('scroll', reveal, {passive:true});
-      reveal();
-      cleanup=()=>{
-        stopStills();stopArticle();stopObserver();
-        removeEventListener('scroll',reveal);
-        document.body.classList.remove('detail-header-shown');
-      };
-      return;
-    }
     let frame=0,lastY=scrollY,direction=0,anchor=scrollY;
     const reducedMotion=()=>reduced.matches;
     document.body.classList.add('detail-header-shown');
@@ -6776,12 +6722,10 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
   let back = document.getElementById('reel-buffer');
   const chapterList = document.getElementById('reel-chapters');
   const credit = document.getElementById('reel-credit');
-  const toggle = document.getElementById('reel-toggle');
   const previous = document.getElementById('reel-prev');
   const next = document.getElementById('reel-next');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const portrait = window.matchMedia('(max-aspect-ratio: 3/4)');
-  let requested = !reduceMotion.matches;
   let visible = true;
   let index = 0;
   let pending = null;
@@ -6797,10 +6741,10 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
     return button;
   });
   const wrap = i => (i + chapters.length) % chapters.length;
-  const shouldPlay = () => visible && requested && !document.hidden;
+  const shouldPlay = () => visible && !reduceMotion.matches && !document.hidden;
   function refresh() {
     const lang = getLanguage();
-    const key = [lang, index, requested].join('/');
+    const key = [lang, index].join('/');
     if (lastLabel !== key) {
       lastLabel = key;
       credit.textContent = cases[chapters[index].key].title[lang];
@@ -6810,11 +6754,10 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
         button.setAttribute('aria-current', String(i === index));
         button.style.setProperty('--played', i < index ? 1 : 0);
       });
-      for (const [button, label] of [[previous, lang ? 'Previous film' : '上一部'], [next, lang ? 'Next film' : '下一部'], [toggle, requested ? (lang ? 'Pause reel' : '暂停轮播') : (lang ? 'Play reel' : '播放轮播')]]) {
+      for (const [button, label] of [[previous, lang ? 'Previous film' : '上一部'], [next, lang ? 'Next film' : '下一部']]) {
         button.title = label;
         button.setAttribute('aria-label', label);
       }
-      toggle.textContent = requested ? 'Ⅱ' : '▶';
     }
     if (front.duration > 0) buttons[index].style.setProperty('--played', Math.min(1, front.currentTime / front.duration));
   }
@@ -6887,7 +6830,6 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
   }
   previous.onclick = () => select(wrap((pending ?? index) - 1));
   next.onclick = () => select(wrap((pending ?? index) + 1));
-  toggle.onclick = () => { requested = !requested; sync(); };
   for (const player of [front, back]) {
     player.muted = true;
     player.defaultMuted = true;
@@ -6900,7 +6842,7 @@ window.createArchiveTimeline = function (element, records, order, dateMap, onSel
     });
   }
   front.dataset.chapter = '0';
-  reduceMotion.addEventListener('change', () => { requested = !reduceMotion.matches; sync(); });
+  reduceMotion.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);
   sync();
   return { refresh, currentKey: () => chapters[index].key, setVisible(value) { if (visible !== value) { visible = value; sync(); } } };
